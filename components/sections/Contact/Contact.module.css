@@ -1,0 +1,7 @@
+.section { position: relative; padding-top: var(--section-space-md); }
+.contact { display: grid; gap: var(--space-8); }
+.text { margin-top: var(--space-4); max-width: 32rem; }
+
+@media (min-width: 992px) {
+  .contact { grid-template-columns: 5fr 6fr; gap: var(--gap-split); align-items: center; }
+}

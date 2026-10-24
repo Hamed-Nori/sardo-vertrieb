@@ -1,0 +1,27 @@
+.section { position: relative; padding-top: var(--section-space-lg); }
+.grid { display: grid; gap: var(--gap-grid); }
+
+.audience {
+  display: grid; gap: var(--space-4);
+  margin-top: var(--section-space-sm);
+  padding-top: var(--space-6);
+  border-top: var(--border-width-hairline) solid var(--color-border-subtle);
+}
+.audienceLabel { color: var(--color-text-muted); font-size: var(--type-eyebrow-size); font-weight: 600; letter-spacing: var(--type-eyebrow-tracking); text-transform: uppercase; }
+.audienceList { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-5); }
+.audienceList li { padding-block: var(--space-3); border-bottom: var(--border-width-hairline) solid var(--color-border-subtle); color: var(--color-text-primary); font-size: var(--type-body-size); }
+
+@media (max-width: 479.98px) {
+  .audienceList li:last-child { grid-column: 1 / -1; }
+}
+@media (min-width: 768px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .audienceList { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 992px) {
+  .grid { grid-template-columns: 7fr 5fr; }
+  .audience { grid-template-columns: auto 1fr; align-items: center; gap: var(--space-8); }
+  .audienceList { display: flex; justify-content: space-between; gap: var(--space-5); }
+  .audienceList li { padding: 0; border: 0; }
+  .audienceList li:not(:last-child)::after { content: ""; display: inline-block; width: 1px; height: 1em; margin-left: var(--space-5); vertical-align: -0.12em; background: var(--color-border-default); }
+}

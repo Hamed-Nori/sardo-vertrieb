@@ -1,0 +1,16 @@
+.list { display: grid; gap: var(--space-3); margin-top: var(--space-6); }
+.list li {
+  position: relative; padding-left: var(--space-7);
+  color: var(--color-text-primary); font-size: var(--type-small-size); line-height: var(--type-small-line);
+}
+.list li::before {
+  content: ""; position: absolute; left: 0; top: 0.05em;
+  width: 1.25rem; height: 1.25rem; border-radius: var(--radius-sm);
+  background: var(--color-surface-card);
+}
+.list li::after {
+  content: ""; position: absolute; left: 0.45rem; top: 0.28em;
+  width: 0.35rem; height: 0.65rem;
+  border: solid var(--color-accent-strong); border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

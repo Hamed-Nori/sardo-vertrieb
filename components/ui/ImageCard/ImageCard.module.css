@@ -1,0 +1,47 @@
+/* Bildkarte (Leistungen) – Referenz: Problem-Karten mit Text auf Bildverlauf */
+.card {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 30rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-card);
+}
+.image {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform var(--duration-long) var(--ease-standard);
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(0deg, var(--color-overlay-solid) 0%, var(--color-overlay-strong) 32%, var(--color-overlay-none) 72%);
+}
+.card:hover .image { transform: scale(1.03); }
+.body { padding: var(--pad-card); max-width: 30rem; }
+.index { display: block; color: var(--color-accent-text); font-size: var(--type-small-size); font-weight: 500; letter-spacing: 0.08em; }
+.title {
+  margin-top: var(--space-3);
+  color: var(--color-text-primary);
+  font-size: var(--type-h3-size); line-height: var(--type-h3-line);
+  font-weight: var(--type-heading-weight-strong); letter-spacing: var(--type-h3-tracking);
+}
+.text { margin-top: var(--space-3); color: var(--color-text-secondary); }
+.link { margin-top: var(--space-5); }
+/* Ganze Karte klickbar, Link bleibt einziger Fokus-Stopp */
+.link::before { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.link:focus-visible { outline: none; }
+.card:has(.link:focus-visible) { outline: var(--border-width-strong) solid var(--color-focus-ring); outline-offset: 3px; }
+
+/* Variante „stacked“: Bild oben, Text auf Fläche – wenn das Motiv unten liegt */
+.stacked { justify-content: flex-start; }
+.stacked::after { content: none; }
+.stackedMedia { position: relative; z-index: 0; flex: none; aspect-ratio: 4 / 3; }
+.stacked .image { z-index: 0; }
+.stacked .body { position: relative; }
+
+@media (min-width: 768px) {
+  .card { min-height: 34rem; }
+  .stackedMedia { flex: 1 1 0; min-height: 16rem; aspect-ratio: auto; }
+}
+@media (min-width: 992px) {
+  .card { min-height: 36rem; }
+}

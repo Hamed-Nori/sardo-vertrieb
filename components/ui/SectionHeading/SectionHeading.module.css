@@ -1,0 +1,21 @@
+.title {
+  margin-top: var(--stack-eyebrow-heading);
+  color: var(--color-text-primary);
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-h2-tracking);
+  text-wrap: balance;
+}
+
+.lead {
+  margin-top: var(--stack-heading-text);
+  color: var(--color-text-secondary);
+  font-size: var(--type-body-lg-size);
+  line-height: var(--type-body-lg-line);
+  max-width: var(--container-text);
+  text-wrap: pretty;
+}
+
+.head { max-width: 46rem; margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4rem); }
+.center { margin-inline: auto; text-align: center; }

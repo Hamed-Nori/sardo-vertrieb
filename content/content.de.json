@@ -1,0 +1,363 @@
+{
+  "meta": {
+    "title": "Sardo-Vertrieb · Digitale Zahlungslösungen und Kartenzahlung für Unternehmen",
+    "description": "Kartenzahlung für Gastronomie, Einzelhandel, Praxen und Dienstleister: das Zahlungsterminal Shift4 One, ohne Kassenintegration – mit persönlicher Payment-Beratung von Daniele Sardo."
+  },
+  "nav": {
+    "items": [
+      {
+        "label": "Leistungen",
+        "href": "#leistungen"
+      },
+      {
+        "label": "Shift4 One",
+        "href": "#shift4-one"
+      },
+      {
+        "label": "Über mich",
+        "href": "#ueber-mich"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Kontakt",
+        "href": "#kontakt"
+      }
+    ],
+    "cta": {
+      "label": "Beratung anfragen",
+      "href": "#kontakt"
+    }
+  },
+  "hero": {
+    "eyebrow": "Sardo-Vertrieb · Payment-Lösungen",
+    "title": {
+      "text": "Digitale Bezahllösungen",
+      "accent": "für den Geschäftsalltag"
+    },
+    "lead": "Moderne Kartenzahlung für Gastronomie, Einzelhandel und Dienstleistungsunternehmen. Mit persönlicher Beratung und Lösungen, die zu deinem Geschäftsalltag passen.",
+    "checklist": [
+      "Eigenständiges Zahlungsterminal – ohne Kassenintegration",
+      "Ein persönlicher Ansprechpartner statt Hotline"
+    ],
+    "primaryCta": {
+      "label": "Jetzt Beratung anfragen",
+      "href": "#kontakt"
+    },
+    "secondaryCta": {
+      "label": "Lösungen entdecken",
+      "href": "#leistungen"
+    },
+    "image": {
+      "src": "/images/hero-shift4-one-terminal-1920.webp",
+      "alt": "Kartenzahlungsterminal Shift4 One auf einem dunklen Geschäftstresen",
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "services": {
+    "eyebrow": "Unsere Lösungen",
+    "title": {
+      "text": "Digitale Zahlungslösungen,",
+      "accent": "die zu deinem Unternehmen passen."
+    },
+    "items": [
+      {
+        "index": "01",
+        "title": "Kartenzahlung & Payment",
+        "text": "Moderne Zahlungslösungen für Unternehmen, die Kartenzahlungen einfach und zuverlässig anbieten möchten.",
+        "link": {
+          "label": "Beratung anfragen",
+          "href": "#kontakt"
+        },
+        "variant": "overlay",
+        "image": {
+          "src": "/images/payment-cards-contactless-900.webp",
+          "alt": "Mehrere Zahlungskarten mit Chip und Kontaktlos-Symbol auf einer dunklen Holzfläche",
+          "width": 900,
+          "height": 1240,
+          "position": "50% 62%"
+        }
+      },
+      {
+        "index": "02",
+        "title": "Shift4 One – Mobile Kartenzahlung",
+        "text": "Ein eigenständiges Zahlungsterminal für Unternehmen, die Kartenzahlungen flexibel und unabhängig von einem Kassensystem annehmen möchten.",
+        "link": {
+          "label": "Zum Terminal",
+          "href": "#shift4-one"
+        },
+        "variant": "stacked",
+        "image": {
+          "src": "/images/retail-terminal-checkout-900.webp",
+          "alt": "Zahlungsterminal an der Kasse eines Modegeschäfts, auf dem Display die Zahlarten Karte, Handy und Uhr",
+          "width": 900,
+          "height": 1240,
+          "position": "50% 78%"
+        }
+      }
+    ],
+    "audience": {
+      "label": "Geeignet für",
+      "items": [
+        "Gastronomie",
+        "Cafés & Restaurants",
+        "Einzelhandel",
+        "Praxen",
+        "Dienstleistungsbetriebe"
+      ]
+    }
+  },
+  "product": {
+    "eyebrow": "Shift4 One",
+    "title": {
+      "text": "Kartenzahlung.",
+      "accent": "Eigenständig und flexibel."
+    },
+    "lead": "Mit Shift4 One können Unternehmen Kartenzahlungen unabhängig von einer Integration in ihr bestehendes Kassensystem anbieten.",
+    "info": [
+      {
+        "title": "Eigenständiges Zahlungsterminal",
+        "text": "nimmt Kartenzahlungen selbstständig an."
+      },
+      {
+        "title": "Keine Kassenintegration erforderlich",
+        "text": "dein Kassensystem bleibt, wie es ist."
+      },
+      {
+        "title": "Für verschiedene Geschäftsmodelle",
+        "text": "vom Café bis zur Praxis."
+      },
+      {
+        "title": "Persönliche Beratung zu den Konditionen",
+        "text": "direkt mit Daniele."
+      }
+    ],
+    "cta": {
+      "label": "Mehr über Shift4 One erfahren",
+      "href": "#faq"
+    },
+    "image": {
+      "src": "/images/shift4-one-payment-success-900.webp",
+      "alt": "Zahlungsterminal Shift4 One mit der Anzeige „Zahlung erfolgreich“ und ausgedrucktem Beleg",
+      "width": 900,
+      "height": 1240,
+      "position": "50% 42%",
+      "badge": "Illustrative Darstellung"
+    },
+    "stats": [
+      {
+        "value": "0 €",
+        "label": "für das erste Terminal",
+        "verify": true
+      },
+      {
+        "value": "1,29 %",
+        "label": "Gebühr pro Transaktion",
+        "verify": true
+      },
+      {
+        "value": "14 €",
+        "label": "pro Monat je weiterem Terminal",
+        "verify": true
+      }
+    ],
+    "statsNote": "Nach den aktuell vorliegenden Konditionsangaben. Alle Details klären wir im persönlichen Gespräch."
+  },
+  "about": {
+    "eyebrow": "Über mich",
+    "title": {
+      "text": "Persönliche Beratung",
+      "accent": "statt komplizierter Entscheidungen."
+    },
+    "greeting": "Hallo, mein Name ist Daniele Sardo.",
+    "paragraphs": [
+      "Ich unterstütze kleine und mittelständische Unternehmen dabei, moderne digitale Zahlungslösungen zu entdecken, die passend für ihren Geschäftsalltag sind.",
+      "Dabei lege ich besonderen Wert auf persönliche Beratung und transparente Kommunikation.",
+      "Neben meiner unternehmerischen Tätigkeit studiere ich Governance und Public Policy an der TU Darmstadt und habe einen Bachelorabschluss in Staatswissenschaften."
+    ],
+    "signature": {
+      "name": "Daniele Sardo",
+      "role": "Inhaber · Sardo-Vertrieb"
+    },
+    "cta": {
+      "label": "Mit Daniele sprechen",
+      "href": "#kontakt"
+    },
+    "image": {
+      "src": "/images/consulting-desk-900.webp",
+      "alt": "Arbeitsplatz mit Notizbuch, Stift und Smartphone auf einem dunklen Schreibtisch",
+      "width": 900,
+      "height": 1240,
+      "position": "42% 70%"
+    }
+  },
+  "faq": {
+    "eyebrow": "Häufige Fragen",
+    "title": {
+      "text": "Gut zu wissen."
+    },
+    "items": [
+      {
+        "question": "Für welche Unternehmen sind diese Lösungen geeignet?",
+        "answer": "Die Lösungen eignen sich unter anderem für Gastronomiebetriebe, Einzelhandel, Praxen und verschiedene Dienstleistungsunternehmen, die eine eigenständige und unabhängige Zahlungslösung im Geschäftsalltag einsetzen möchten."
+      },
+      {
+        "question": "Kann ich mein bestehendes Kassensystem behalten?",
+        "answer": "Ja. Shift4 One funktioniert unabhängig von einer Kassenintegration. Du kannst dein bestehendes Kassensystem weiterhin nutzen."
+      },
+      {
+        "question": "Was kostet ein Terminal?",
+        "answer": "Nach den aktuell vorliegenden Konditionsangaben kostet das erste Terminal zunächst 0 €. Für Transaktionen fallen Gebühren von 1,29 % an. Jedes weitere Terminal kostet 14 € monatlich.",
+        "verify": true
+      },
+      {
+        "question": "Lohnt sich ein Wechsel von meinem bisherigen Anbieter?",
+        "answer": "Das lässt sich am besten anhand deiner tatsächlichen Gesamtkosten bestimmen. Dabei sollten Transaktionsgebühren, laufende Kosten und zusätzliche Leistungen miteinander verglichen werden."
+      },
+      {
+        "question": "Wie lange dauert es, bis ich ein funktionierendes Terminal erhalte?",
+        "answer": "Nach erfolgreicher Registrierung und interner Prüfung wird das Terminal per Post versendet. Insgesamt dauert der Prozess nach den vorliegenden Angaben ungefähr fünf bis sieben Werktage.",
+        "verify": true
+      }
+    ],
+    "hint": {
+      "text": "Deine Frage ist nicht dabei?",
+      "link": {
+        "label": "Schreib mir direkt",
+        "href": "#kontakt"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": {
+      "text": "Lass uns ins",
+      "accent": "Gespräch kommen."
+    },
+    "lead": "Du möchtest mehr über moderne Payment-Lösungen erfahren oder deine aktuellen Konditionen vergleichen?",
+    "text": "Schreib mir gerne. Ich melde mich bei dir, um einen Termin auszumachen und dein Anliegen zu besprechen.",
+    "steps": [
+      "Anfrage senden",
+      "Daniele meldet sich bei dir",
+      "Termin & persönliche Beratung"
+    ],
+    "form": {
+      "title": "Beratungsanfrage",
+      "fields": {
+        "name": {
+          "label": "Dein Name",
+          "required": true,
+          "error": "Bitte gib deinen Namen ein."
+        },
+        "company": {
+          "label": "Unternehmen",
+          "required": true,
+          "error": "Bitte gib dein Unternehmen an."
+        },
+        "email": {
+          "label": "E-Mail-Adresse",
+          "required": true,
+          "errorEmpty": "Bitte gib deine E-Mail-Adresse ein.",
+          "errorInvalid": "Bitte gib eine gültige E-Mail-Adresse ein, z. B. name@unternehmen.de."
+        },
+        "topic": {
+          "label": "Worum geht es?",
+          "required": true,
+          "placeholder": "Bitte auswählen",
+          "error": "Bitte wähle aus, worum es geht.",
+          "options": [
+            {
+              "value": "payment",
+              "label": "Ich interessiere mich für eine Payment-Lösung."
+            },
+            {
+              "value": "kosten",
+              "label": "Ich möchte meine aktuellen Kosten vergleichen."
+            },
+            {
+              "value": "beratung",
+              "label": "Ich wünsche eine allgemeine Beratung."
+            },
+            {
+              "value": "sonstiges",
+              "label": "Sonstige Anliegen."
+            }
+          ]
+        },
+        "message": {
+          "label": "Deine Nachricht",
+          "required": false,
+          "optionalLabel": "(optional)"
+        }
+      },
+      "legal": "Mit * markierte Felder sind Pflichtfelder. Informationen zur Verarbeitung deiner Daten findest du in der Datenschutzerklärung.",
+      "submit": "Beratungsanfrage senden",
+      "status": {
+        "demo": "Vorschau-Formular: Es wird noch keine Nachricht versendet.",
+        "invalid": "Bitte prüfe die markierten Felder.",
+        "success": "[FREIGABE AUSSTEHEND] Danke! Deine Anfrage ist angekommen. Ich melde mich in Kürze bei dir.",
+        "error": "[FREIGABE AUSSTEHEND] Das hat leider nicht geklappt. Bitte versuche es später erneut."
+      }
+    },
+    "backgroundImage": {
+      "src": "/images/cafe-interior-900.webp",
+      "width": 900,
+      "height": 1240,
+      "position": "50% 40%"
+    }
+  },
+  "footer": {
+    "claim": "Digitale Zahlungslösungen mit persönlicher Beratung.",
+    "columns": [
+      {
+        "heading": "Seite",
+        "links": [
+          {
+            "label": "Leistungen",
+            "href": "#leistungen"
+          },
+          {
+            "label": "Shift4 One",
+            "href": "#shift4-one"
+          },
+          {
+            "label": "Über mich",
+            "href": "#ueber-mich"
+          },
+          {
+            "label": "FAQ",
+            "href": "#faq"
+          },
+          {
+            "label": "Kontakt",
+            "href": "#kontakt"
+          }
+        ]
+      },
+      {
+        "heading": "Rechtliches",
+        "links": [
+          {
+            "label": "Impressum",
+            "href": "/impressum"
+          },
+          {
+            "label": "Datenschutz",
+            "href": "/datenschutz"
+          }
+        ]
+      }
+    ],
+    "trademark": "Shift4 und Shift4 One sind Marken ihrer jeweiligen Inhaber.",
+    "credit": {
+      "text": "Website erstellt von",
+      "link": {
+        "label": "ncodea",
+        "href": "https://www.ncodea.de"
+      }
+    }
+  }
+}

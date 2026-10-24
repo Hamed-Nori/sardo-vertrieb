@@ -1,0 +1,4 @@
+.legal { padding-block: calc(var(--header-height) + var(--space-10)) var(--section-space-md); }
+.title { color: var(--color-text-primary); font-size: var(--type-h1-size); line-height: var(--type-h1-line); font-weight: var(--type-heading-weight); margin-top: var(--space-5); }
+.todo { margin-top: var(--space-6); padding: var(--space-4) var(--space-5); border: var(--border-width-hairline) dashed var(--color-border-default); border-radius: var(--radius-sm); color: var(--color-accent-strong); font-size: var(--type-small-size); }
+.back { margin-top: var(--space-8); }

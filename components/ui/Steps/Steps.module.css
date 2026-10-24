@@ -1,0 +1,8 @@
+.steps { display: grid; gap: var(--space-3); margin-top: var(--space-7); counter-reset: step; }
+.item { display: flex; align-items: center; gap: var(--space-4); color: var(--color-text-primary); font-size: var(--type-small-size); }
+.index {
+  display: inline-grid; place-items: center; flex: none;
+  width: 2.25rem; height: 2.25rem; border-radius: var(--radius-pill);
+  border: var(--border-width-hairline) solid var(--color-border-default);
+  color: var(--color-accent-text); font-size: var(--type-caption-size); font-weight: 500;
+}

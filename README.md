@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sardo-Vertrieb – Website
 
-## Getting Started
+Next.js-Umsetzung (App Router, TypeScript, CSS Modules, GSAP + ScrollTrigger) des freigegebenen
+Prototyps aus `../sardo-vertrieb-design/`. Der Prototyp ist die visuelle Referenz, `docs/09` die Bauanleitung.
 
-First, run the development server:
+## Befehle
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # Entwicklung
+npm run build        # Produktions-Build
+npm run lint
+npm start            # Produktionsserver (Standard-Port 3000, z. B. -- -p 3100)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Qualitätssicherung
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build && npx next start -p 3100
+python3 -m http.server 8080 -d ../sardo-vertrieb-design   # Prototyp
+SITE_URL=http://localhost:3100/ npm run qa:visual          # Screenshots + Pixel-Diff 1440/1280/768/390/375
+SITE_URL=http://localhost:3100/ npm run qa:functional      # Formular, API-Schutz, Menü, Motion, SEO
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ergebnisse liegen in `qa/output/` (Screenshots, Diff-Bilder, `report.json`).
 
-## Learn More
+## Struktur
 
-To learn more about Next.js, take a look at the following resources:
+| Pfad | Inhalt |
+|---|---|
+| `styles/tokens.css` | 1 : 1 Kopie von `design-system/tokens.css` (`--font-sans` wird in `app/globals.css` auf next/font umgestellt) |
+| `content/content.de.json` | 1 : 1 Kopie aller Texte, typisiert über `types/content.ts` |
+| `components/ui` | wiederverwendbare Bausteine (Button, Eyebrow, Panel, ImageCard, Field …) |
+| `components/layout` | SiteHeader + MobileMenu (Client), SiteFooter, Wordmark, LegalPage |
+| `components/sections` | Hero, Services, Product, About, Faq, Contact (+ ContactForm, Client) |
+| `components/motion/Reveal.tsx` | GSAP-Reveals je Section (nur bei `prefers-reduced-motion: no-preference`) |
+| `lib/contact-schema.ts` | Zod-Schema für Client und Server |
+| `app/api/contact/route.ts` | POST-Handler: Content-Type, Größenlimit, Honeypot, Mindest-Ausfüllzeit, Rate-Limit, Resend |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Kontaktformular aktivieren
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. `.env.example` nach `.env.local` (bzw. in die Hosting-Umgebung) übernehmen.
+2. `RESEND_API_KEY`, `CONTACT_TO` und `CONTACT_FROM` (verifizierte Domain) setzen.
+3. Neu bauen. Ohne diese Variablen bleibt das Formular im Demo-Modus mit Hinweis und versendet nichts.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Das Rate-Limit (5 Anfragen / 10 min pro IP) liegt im Speicher der Instanz; bei mehreren
+Serverless-Instanzen durch Upstash Redis / Vercel KV ersetzen.

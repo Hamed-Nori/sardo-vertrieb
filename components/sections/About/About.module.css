@@ -1,0 +1,19 @@
+.section { position: relative; padding-top: var(--section-space-lg); }
+.about { display: grid; gap: var(--space-8); }
+.letter { display: grid; gap: var(--space-4); margin-top: var(--space-6); max-width: var(--container-text); }
+.greeting { color: var(--color-text-primary); font-size: var(--type-h3-size); line-height: var(--type-h3-line); font-style: italic; letter-spacing: var(--type-h3-tracking); }
+.cta { margin-top: var(--stack-text-cta); }
+.media { position: relative; overflow: hidden; border-radius: var(--radius-md); align-self: stretch; min-height: 22rem; }
+.image { object-fit: cover; }
+.media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--color-overlay-strong) 0%, var(--color-overlay-none) 45%); }
+.signature { position: absolute; left: var(--space-5); right: var(--space-5); bottom: var(--space-5); z-index: 1; display: grid; gap: var(--space-1); }
+.signatureName { color: var(--color-text-primary); font-size: var(--type-h4-size); font-weight: 500; }
+.signatureRole { color: var(--color-text-muted); font-size: var(--type-caption-size); }
+
+@media (min-width: 768px) {
+  .media { min-height: 28rem; }
+}
+@media (min-width: 992px) {
+  .about { grid-template-columns: 7fr 5fr; gap: var(--gap-split); align-items: stretch; }
+  .media { min-height: 0; }
+}

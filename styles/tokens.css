@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Sardo-Vertrieb – Design Tokens (CSS Custom Properties)
+   Spiegel von design-system/tokens.json – beide Dateien synchron halten.
+   Version 1.0.0 · Werte mit (M) sind an der Referenz gemessen, siehe docs/01.
+   ========================================================================== */
+
+/* Schrift-Dateien: design-system/fonts.css (Instrument Sans, OFL) */
+
+:root {
+  /* ---------- Farbe · Basis-Palette (nur über semantische Tokens verwenden) */
+  --palette-ink-950: #171A1B;   /* Referenz-Body #191919 (M), leicht Richtung Petrol gezogen */
+  --palette-ink-925: #1A2022;
+  --palette-ink-900: #1B2427;   /* Referenz-Kartenfläche #182123 (M) */
+  --palette-ink-850: #222D30;
+  --palette-ink-800: #263134;
+  --palette-ink-700: #33424A;
+  --palette-ink-500: #5F7378;
+  --palette-grey-400: #8E9A9C;
+  --palette-grey-300: #ADB8BA;
+  --palette-grey-50:  #F3F5F5;
+  --palette-petrol-700: #2F6B79; /* Referenz-Akzent #226474 (M), aufgehellt für 6:1 mit Weiß */
+  --palette-petrol-600: #387A89;
+  --palette-petrol-400: #6FA0AD;
+  --palette-petrol-300: #8CBAC5;
+  --palette-coral-300: #E39A8E;
+
+  /* ---------- Farbe · Semantisch -------------------------------------- */
+  --color-background-primary:   var(--palette-ink-950); /* Seitenhintergrund */
+  --color-background-secondary: var(--palette-ink-925); /* Footer */
+  --color-surface-card:         var(--palette-ink-900); /* Panels, Badges, Formular */
+  --color-surface-raised:       var(--palette-ink-850); /* Inputs, Hover auf Flächen */
+  --color-text-primary:   var(--palette-grey-50);   /* 16.0:1 auf bg · 14.5:1 auf card */
+  --color-text-secondary: var(--palette-grey-300);  /*  8.6:1 auf bg ·  7.8:1 auf card */
+  --color-text-muted:     var(--palette-grey-400);  /*  6.0:1 auf bg ·  5.5:1 auf card */
+  --color-text-on-accent: #FFFFFF;                  /*  6.0:1 auf accent-primary */
+  --color-accent-primary: var(--palette-petrol-700); /* Primär-Button */
+  --color-interactive-hover: var(--palette-petrol-600); /* Primär-Button Hover · 4.9:1 mit Weiß */
+  --color-accent-text:    var(--palette-petrol-400); /* kursive Headline-Akzente, Eyebrows · 6.1:1 */
+  --color-accent-strong:  var(--palette-petrol-300); /* Links, Fokus · 8.3:1 */
+  --color-border-subtle:  var(--palette-ink-800);   /* Trennlinien (dekorativ) */
+  --color-border-default: var(--palette-ink-700);   /* Secondary-Button, Kartenrahmen */
+  --color-border-control: var(--palette-ink-500);   /* Formularfelder · 3.5:1 (WCAG 1.4.11) */
+  --color-focus-ring:     var(--palette-petrol-300);
+  --color-feedback-error: var(--palette-coral-300); /* 7.7:1 auf bg */
+  --color-overlay-solid:  rgba(23, 26, 27, 1);
+  --color-overlay-strong: rgba(23, 26, 27, 0.86);   /* Referenz: Bild-Overlay 84 % (M) */
+  --color-overlay-half:   rgba(23, 26, 27, 0.5);
+  --color-overlay-none:   rgba(23, 26, 27, 0);
+
+  /* ---------- Typografie ----------------------------------------------- */
+  --font-sans: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+
+  --type-hero-size: clamp(2.375rem, 1.6rem + 2.6vw, 3.5rem);   /* 38 → 56px (Ref. 41px) */
+  --type-hero-line: 1.1;
+  --type-hero-weight: 400;
+  --type-hero-tracking: -0.022em;
+
+  --type-h1-size: clamp(2.125rem, 1.6rem + 1.8vw, 3rem);       /* 34 → 48px (Unterseiten) */
+  --type-h1-line: 1.12;
+  --type-h2-size: clamp(1.875rem, 1.45rem + 1.4vw, 2.625rem);  /* 30 → 42px (Ref. 36–40px) */
+  --type-h2-line: 1.16;
+  --type-h2-tracking: -0.018em;
+  --type-h3-size: clamp(1.25rem, 1.12rem + 0.45vw, 1.5rem);    /* 20 → 24px */
+  --type-h3-line: 1.28;
+  --type-h3-tracking: -0.01em;
+  --type-h4-size: 1.0625rem;                                    /* 17px (Ref. Kartentitel 17px/500) */
+  --type-h4-line: 1.4;
+  --type-heading-weight: 400;
+  --type-heading-weight-strong: 600;
+
+  --type-body-lg-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem); /* 17 → 19px (Ref. Hero-Lead 19px) */
+  --type-body-lg-line: 1.65;
+  --type-body-size: 1rem;          /* 16px (Ref. 16px/1.7) */
+  --type-body-line: 1.7;
+  --type-small-size: 0.875rem;     /* 14px */
+  --type-small-line: 1.55;
+  --type-caption-size: 0.8125rem;  /* 13px */
+  --type-caption-line: 1.5;
+  --type-stat-size: clamp(2rem, 1.6rem + 1.2vw, 2.75rem);     /* Kennzahlen (Ref. 34px/700) */
+  --type-stat-weight: 500;
+
+  --type-eyebrow-size: 0.6875rem;  /* 11px (Ref. Badge-Text) */
+  --type-eyebrow-weight: 600;
+  --type-eyebrow-tracking: 0.16em;
+  --type-button-size: 0.9375rem;   /* 15px (Ref. 16px/700) */
+  --type-button-weight: 600;
+  --type-button-tracking: 0.005em;
+  --type-nav-size: 0.9375rem;      /* 15px (Ref. 15px/700 – hier 500, ruhiger) */
+  --type-nav-weight: 500;
+  --type-label-size: 0.875rem;
+  --type-label-weight: 500;
+
+  /* ---------- Spacing (4-px-Basis) ------------------------------------ */
+  --space-1: 0.25rem;  /*   4 */
+  --space-2: 0.5rem;   /*   8 */
+  --space-3: 0.75rem;  /*  12 */
+  --space-4: 1rem;     /*  16 */
+  --space-5: 1.5rem;   /*  24 */
+  --space-6: 2rem;     /*  32 */
+  --space-7: 2.5rem;   /*  40 */
+  --space-8: 3rem;     /*  48 */
+  --space-9: 4rem;     /*  64 */
+  --space-10: 5rem;    /*  80 */
+  --space-11: 6rem;    /*  96 */
+  --space-12: 8rem;    /* 128 */
+
+  /* Rhythmus: drei Section-Abstände (Ref. misst 50–100px, uneinheitlich) */
+  --section-space-lg: clamp(5rem, 3rem + 6vw, 8.5rem);    /* 80 → 136 */
+  --section-space-md: clamp(4rem, 2.6rem + 4vw, 6.5rem);  /* 64 → 104 */
+  --section-space-sm: clamp(2.5rem, 2rem + 2vw, 4rem);    /* 40 →  64 */
+  --stack-eyebrow-heading: var(--space-5);  /* Badge → Headline */
+  --stack-heading-text: var(--space-5);     /* Headline → Text */
+  --stack-text-cta: var(--space-7);         /* Text → CTA */
+  --gap-split: clamp(2.5rem, 1rem + 5vw, 5.5rem);   /* Bild ↔ Text */
+  --gap-grid: clamp(1rem, 0.6rem + 1.2vw, 1.5rem);  /* Karten-Abstand (Ref. ~30px) */
+  --pad-card: clamp(1.5rem, 1rem + 1.6vw, 2.5rem);  /* Karten-Innenabstand */
+  --pad-panel: clamp(1.25rem, 0.5rem + 4vw, 4.5rem);/* große Panels (Über mich, Kontakt) */
+
+  /* ---------- Layout -------------------------------------------------- */
+  --container-max: 1100px;        /* (M) Inhaltscontainer der Referenz bei 1470px Viewport */
+  --container-text: 620px;
+  --container-narrow: 820px;      /* FAQ */
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem); /* 20 → 40px */
+  --header-height: 4.5rem;        /* 72px */
+
+  /* Breakpoints – Referenzwerte für Media Queries (Literale in CSS) */
+  --bp-sm: 480px;
+  --bp-md: 768px;   /* (M) Bootstrap-3-Breakpoints der Referenz */
+  --bp-lg: 992px;   /* (M) */
+  --bp-xl: 1200px;  /* (M) */
+  --bp-2xl: 1440px;
+
+  /* ---------- Form -------------------------------------------------- */
+  --radius-sm: 6px;      /* Inputs, Info-Zeilen */
+  --radius-md: 10px;     /* Badges, kleine Karten (M: 8–10px) */
+  --radius-lg: 20px;     /* Bildkarten, Panels (M: 20px) */
+  --radius-pill: 999px;  /* Buttons (M: 25px bei 45–59px Höhe = Pille) */
+  --border-width-hairline: 1px;
+  --border-width-strong: 2px;
+  --shadow-menu: 0 24px 48px -24px rgba(0, 0, 0, 0.6); /* nur Mobile-Menü */
+
+  /* ---------- Ebenen ------------------------------------------------ */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-header: 100;
+  --z-menu: 200;
+  --z-skip: 300;
+
+  /* ---------- Bewegung ---------------------------------------------- */
+  --duration-short: 160ms;
+  --duration-medium: 320ms;
+  --duration-long: 700ms;
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1); /* ≈ GSAP power2.out */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);      /* ≈ GSAP power2.inOut */
+  --motion-reveal-distance: 24px;
+  --motion-hover-shift: 2px;
+  --motion-stagger: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-short: 0ms;
+    --duration-medium: 0ms;
+    --duration-long: 0ms;
+    --motion-reveal-distance: 0px;
+    --motion-hover-shift: 0px;
+    --motion-stagger: 0ms;
+  }
+}

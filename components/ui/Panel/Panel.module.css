@@ -1,0 +1,20 @@
+.panel {
+  position: relative; isolation: isolate; overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-card);
+  padding: var(--pad-panel);
+}
+.image {
+  background: var(--color-background-primary);
+  border: var(--border-width-hairline) solid var(--color-border-subtle);
+}
+.backdrop { position: absolute; inset: 0; z-index: -1; }
+.backdrop img { object-fit: cover; }
+.backdrop::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--color-overlay-strong) 0%, var(--color-overlay-solid) 100%);
+}
+
+@media (min-width: 768px) {
+  .backdrop::after { background: linear-gradient(90deg, var(--color-overlay-solid) 0%, var(--color-overlay-strong) 45%, var(--color-overlay-half) 100%); }
+}

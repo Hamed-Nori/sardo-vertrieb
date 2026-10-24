@@ -1,0 +1,2 @@
+.section { position: relative; padding-top: var(--section-space-lg); }
+.hint { margin-top: var(--space-7); text-align: center; color: var(--color-text-muted); }

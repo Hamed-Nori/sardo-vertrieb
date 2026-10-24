@@ -1,0 +1,297 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import type { Content } from "@/types/content";
+import {
+  contactFieldsSchema,
+  type ContactErrorResponse,
+  type ContactField,
+} from "@/lib/contact-schema";
+import { Button } from "@/components/ui/Button/Button";
+import { errorId, Field, Input, Select, Textarea } from "@/components/ui/Field/Field";
+import { TextLink } from "@/components/ui/TextLink/TextLink";
+import styles from "./ContactForm.module.css";
+
+type FormContent = Content["contact"]["form"];
+type Props = { form: FormContent; demo: boolean } & Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">;
+
+type Values = Record<ContactField, string>;
+type Errors = Partial<Record<ContactField, string>>;
+type Status = "idle" | "invalid" | "demo-sent" | "submitting" | "success" | "error";
+
+const REQUIRED: ContactField[] = ["name", "company", "email", "topic"];
+const EMPTY: Values = { name: "", company: "", email: "", topic: "", message: "" };
+
+function messageFor(field: ContactField, value: string, form: FormContent): string {
+  const f = form.fields;
+  const result = contactFieldsSchema.shape[field].safeParse(value);
+  if (result.success) return "";
+  switch (field) {
+    case "name":
+      return f.name.error;
+    case "company":
+      return f.company.error;
+    case "email":
+      return value.trim() ? f.email.errorInvalid : f.email.errorEmpty;
+    case "topic":
+      return f.topic.error;
+    default:
+      return "";
+  }
+}
+
+// Der Legal-Text verweist auf die Datenschutzerklärung – das Wort wird zum Link
+function LegalText({ text }: { text: string }) {
+  const word = "Datenschutzerklärung";
+  const [before, after] = text.split(word);
+  if (after === undefined) return <>{text}</>;
+  return (
+    <>
+      {before}
+      <TextLink href="/datenschutz" inline>
+        {word}
+      </TextLink>
+      {after}
+    </>
+  );
+}
+
+export function ContactForm({ form, demo, className, ...rest }: Props) {
+  const [values, setValues] = useState<Values>(EMPTY);
+  const [errors, setErrors] = useState<Errors>({});
+  const [status, setStatus] = useState<Status>("idle");
+  const [honeypot, setHoneypot] = useState("");
+  const touched = useRef(new Set<ContactField>());
+  const startedAt = useRef(0);
+  const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
+
+  const validate = (field: ContactField, value: string) => {
+    if (!REQUIRED.includes(field)) return true;
+    const message = messageFor(field, value, form);
+    setErrors((prev) => ({ ...prev, [field]: message || undefined }));
+    return !message;
+  };
+
+  const focusField = (field: ContactField) => {
+    const control = formRef.current?.elements.namedItem(field);
+    if (control instanceof HTMLElement) control.focus();
+  };
+
+  // Prüfung erst nach dem ersten Verlassen, danach live (wie im Prototyp)
+  type ControlEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+
+  const onBlur = (event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const field = event.target.name as ContactField;
+    if (values[field].trim() || touched.current.has(field)) validate(field, values[field]);
+    touched.current.add(field);
+  };
+
+  const onChange = (event: ControlEvent) => {
+    const field = event.target.name as ContactField;
+    const value = event.target.value;
+    setValues((prev) => ({ ...prev, [field]: value }));
+    if (errors[field] || field === "topic") validate(field, value);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (status === "submitting") return;
+
+    let firstInvalid: ContactField | null = null;
+    const nextErrors: Errors = {};
+    for (const field of REQUIRED) {
+      const message = messageFor(field, values[field], form);
+      if (message) {
+        nextErrors[field] = message;
+        firstInvalid ??= field;
+      }
+    }
+    setErrors(nextErrors);
+    if (firstInvalid) {
+      setStatus("invalid");
+      focusField(firstInvalid);
+      return;
+    }
+
+    // Demo: kein Versand, bis der Mailversand konfiguriert ist
+    if (demo) {
+      setStatus("demo-sent");
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, website: honeypot, startedAt: startedAt.current }),
+      });
+      if (response.ok) {
+        setStatus("success");
+        return;
+      }
+      if (response.status === 400) {
+        const data = (await response.json().catch(() => ({}))) as ContactErrorResponse;
+        const serverErrors: Errors = {};
+        for (const field of data.fieldErrors ?? []) {
+          serverErrors[field] = messageFor(field, values[field], form) || form.status.invalid;
+        }
+        if (Object.keys(serverErrors).length) {
+          setErrors(serverErrors);
+          setStatus("invalid");
+          focusField((data.fieldErrors ?? [])[0]);
+          return;
+        }
+      }
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div
+        className={[styles.form, styles.success, className].filter(Boolean).join(" ")}
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        {...(rest as React.HTMLAttributes<HTMLDivElement>)}
+      >
+        <h3 className={styles.title}>{form.title}</h3>
+        <p>{form.status.success}</p>
+      </div>
+    );
+  }
+
+  const f = form.fields;
+  const statusClass = [styles.status, status === "demo-sent" && styles.demoSent].filter(Boolean).join(" ");
+
+  return (
+    <form
+      ref={formRef}
+      className={[styles.form, className].filter(Boolean).join(" ")}
+      noValidate
+      aria-labelledby="form-title"
+      aria-busy={status === "submitting"}
+      onSubmit={onSubmit}
+      {...rest}
+    >
+      <h3 className={styles.title} id="form-title">
+        {form.title}
+      </h3>
+
+      <div className={styles.row}>
+        <Field label={f.name.label} id="f-name" required error={errors.name}>
+          <Input
+            id="f-name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            aria-describedby={errorId("f-name")}
+            invalid={Boolean(errors.name)}
+            value={values.name}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+        </Field>
+        <Field label={f.company.label} id="f-company" required error={errors.company}>
+          <Input
+            id="f-company"
+            name="company"
+            type="text"
+            autoComplete="organization"
+            required
+            aria-describedby={errorId("f-company")}
+            invalid={Boolean(errors.company)}
+            value={values.company}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+        </Field>
+      </div>
+
+      <Field label={f.email.label} id="f-email" required error={errors.email}>
+        <Input
+          id="f-email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          spellCheck={false}
+          required
+          aria-describedby={errorId("f-email")}
+          invalid={Boolean(errors.email)}
+          value={values.email}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </Field>
+
+      <Field label={f.topic.label} id="f-topic" required error={errors.topic}>
+        <Select
+          id="f-topic"
+          name="topic"
+          required
+          aria-describedby={errorId("f-topic")}
+          invalid={Boolean(errors.topic)}
+          placeholder={f.topic.placeholder}
+          options={f.topic.options}
+          value={values.topic}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </Field>
+
+      <Field label={f.message.label} id="f-message" optionalLabel={f.message.optionalLabel}>
+        <Textarea id="f-message" name="message" rows={4} value={values.message} onChange={onChange} />
+      </Field>
+
+      <div className={styles.honeypot} aria-hidden="true">
+        <label htmlFor="f-website">Website</label>
+        <input
+          id="f-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+        />
+      </div>
+
+      <p className={styles.legal}>
+        <LegalText text={form.legal} />
+      </p>
+
+      <Button variant="primary" block type="submit" disabled={status === "submitting"}>
+        {status === "submitting" ? "Wird gesendet …" : form.submit}
+      </Button>
+
+      <div className={statusClass} role="status" aria-live="polite">
+        {demo && (
+          <p className={styles.demo}>
+            <span className={styles.demoBadge}>Demo</span>{" "}
+            {status === "invalid" ? form.status.invalid : form.status.demo}
+          </p>
+        )}
+        {!demo && status === "invalid" && <p className={styles.demo}>{form.status.invalid}</p>}
+      </div>
+      {status === "error" && (
+        <p className={styles.error} role="alert">
+          {form.status.error}
+        </p>
+      )}
+    </form>
+  );
+}
