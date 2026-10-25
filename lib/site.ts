@@ -1,5 +1,4 @@
-// Basis-URL und Indexierung kommen aus der Umgebung. Ohne SITE_INDEXABLE=true bleibt
-// die Seite noindex, bis Impressum/Datenschutz und Konditionen freigegeben sind.
+// Basis-URL und Indexierung kommen aus der Umgebung.
 
 /** Liest SITE_URL und korrigiert offensichtliche Tippfehler (fehlendes „:“ oder „https://“). */
 function resolveSiteUrl(raw: string | undefined): string {
@@ -14,4 +13,11 @@ function resolveSiteUrl(raw: string | undefined): string {
 }
 
 export const siteUrl = resolveSiteUrl(process.env.SITE_URL);
-export const isIndexable = process.env.SITE_INDEXABLE === "true";
+/**
+ * Indexierbar ist die Live-Seite (Vercel Production) – Vorschau-Deployments und lokale Builds
+ * bleiben gesperrt, damit keine Duplikate in Suchmaschinen landen.
+ * SITE_INDEXABLE=true/false überschreibt das ausdrücklich.
+ */
+export const isIndexable =
+  process.env.SITE_INDEXABLE === "true" ||
+  (process.env.SITE_INDEXABLE !== "false" && process.env.VERCEL_ENV === "production");

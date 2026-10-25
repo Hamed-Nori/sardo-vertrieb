@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, motion, motionQueries, useGSAP } from "@/lib/motion";
+import { gsap, isCrawler, motion, motionQueries, useGSAP } from "@/lib/motion";
 
 /**
  * Hero-Intro: einmalig nach document.fonts.ready, < 1 s.
@@ -15,7 +15,7 @@ export function HeroMotion({ children }: { children: React.ReactNode }) {
       const mm = gsap.matchMedia();
       mm.add(motionQueries, (context) => {
         const { motion: allowed, desktop } = context.conditions ?? {};
-        if (!allowed) return;
+        if (!allowed || isCrawler()) return;
 
         const intro = gsap.timeline({ paused: true, defaults: { ease: motion.ease } });
         intro.from("[data-hero-item]", { autoAlpha: 0, y: 16, duration: motion.dur, stagger: motion.stagger }, 0);

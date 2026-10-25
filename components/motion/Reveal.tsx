@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, motion, motionQueries, useGSAP } from "@/lib/motion";
+import { gsap, isCrawler, motion, motionQueries, useGSAP } from "@/lib/motion";
 
 // Section-Reveals laut Tabelle in docs/06-motion-guidelines.md
 const presets = {
@@ -26,7 +26,7 @@ export function Reveal({ preset, children }: Props) {
       const mm = gsap.matchMedia();
       mm.add(motionQueries, (context) => {
         const { motion: allowed, desktop } = context.conditions ?? {};
-        if (!allowed) return;
+        if (!allowed || isCrawler()) return;
         const { start, duration } = presets[preset];
         const tweens: gsap.core.Tween[] = [];
 

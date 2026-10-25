@@ -36,7 +36,13 @@ export const metadata: Metadata = {
     description: content.meta.description,
     url: "/",
   },
-  robots: isIndexable ? { index: true, follow: true } : { index: false, follow: false },
+  robots: isIndexable
+    ? {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+      }
+    : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

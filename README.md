@@ -20,6 +20,7 @@ npm run build && npx next start -p 3100
 python3 -m http.server 8080 -d ../sardo-vertrieb-design   # Prototyp
 SITE_URL=http://localhost:3100/ npm run qa:visual          # Screenshots + Pixel-Diff 1440/1280/768/390/375
 SITE_URL=http://localhost:3100/ npm run qa:functional      # Formular, API-Schutz, Menü, Motion, SEO
+SITE_URL=http://localhost:3100/ npm run qa:crawler         # Crawler-Sicht: KI-Bots ohne JS, Googlebot mit JS
 ```
 
 Ergebnisse liegen in `qa/output/` (Screenshots, Diff-Bilder, `report.json`).
@@ -57,3 +58,13 @@ nicht im echten Postfach landen.
 
 Das Rate-Limit (5 Anfragen / 10 min pro IP) liegt im Speicher der Instanz; bei mehreren
 Serverless-Instanzen durch Upstash Redis / Vercel KV ersetzen.
+
+## Suchmaschinen und KI-Crawler
+
+- Indexierbar ist nur die Live-Seite (`VERCEL_ENV=production`); Vorschau und lokal sind gesperrt.
+  `SITE_INDEXABLE=true/false` überschreibt das.
+- `robots.txt` erlaubt alle Crawler und lädt KI-Crawler (GPTBot, ClaudeBot, PerplexityBot, Google-Extended …)
+  ausdrücklich ein; gesperrt sind nur `/api/` und `/danke`. `sitemap.xml` listet Start, Impressum, Datenschutz.
+- `/llms.txt` fasst alle Inhalte als Markdown für KI-Systeme zusammen (aus `content.de.json` erzeugt).
+- Strukturierte Daten: `FAQPage`, `ProfessionalService`, `WebSite`.
+- Alle Inhalte stehen im Server-HTML. Crawler (per User-Agent erkannt) bekommen keine Scroll-Animationen.

@@ -284,7 +284,13 @@ const TEST_EMAIL = "delivered@resend.dev";
   const h1 = await page.evaluate(() => document.querySelectorAll("h1").length);
   check("Genau eine h1", h1 === 1, String(h1));
   const robotsMeta = await page.evaluate(() => document.querySelector('meta[name="robots"]')?.content);
-  check("Ohne SITE_INDEXABLE: noindex", robotsMeta?.includes("noindex"), String(robotsMeta));
+  const robotsTxt = await (await ctx.request.get(new URL("/robots.txt", SITE).toString())).text();
+  const blocked = /User-Agent: \*\nDisallow: \/\n/.test(robotsTxt);
+  check(
+    `Meta robots passt zu robots.txt (${blocked ? "gesperrt" : "indexierbar"})`,
+    blocked ? robotsMeta?.includes("noindex") : robotsMeta?.startsWith("index, follow"),
+    String(robotsMeta),
+  );
   for (const p of ["/robots.txt", "/sitemap.xml", "/impressum", "/datenschutz"]) {
     const r = await ctx.request.get(new URL(p, SITE).toString());
     check(`${p} erreichbar`, r.status() === 200, String(r.status()));
