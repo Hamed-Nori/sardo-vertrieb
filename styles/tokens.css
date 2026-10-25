@@ -1,52 +1,125 @@
 /* ==========================================================================
    Sardo-Vertrieb – Design Tokens (CSS Custom Properties)
-   Spiegel von design-system/tokens.json – beide Dateien synchron halten.
-   Version 1.0.0 · Werte mit (M) sind an der Referenz gemessen, siehe docs/01.
+   Basis: design-system/tokens.css (Version 1.0.0). Abweichung ab 10/2026:
+   Markenfarbe Blau #005BCC aus dem Logo statt Petrol, Navy-Grundtöne und
+   ein zusätzliches Light-Theme. Typografie, Abstände, Radien, Bewegung unverändert.
    ========================================================================== */
 
-/* Schrift-Dateien: design-system/fonts.css (Instrument Sans, OFL) */
+/* Theme-Auswahl: Standard = Systemeinstellung (prefers-color-scheme).
+   Der Umschalter im Header setzt <html data-theme="light|dark">. */
 
 :root {
   /* ---------- Farbe · Basis-Palette (nur über semantische Tokens verwenden) */
-  --palette-ink-950: #171A1B;   /* Referenz-Body #191919 (M), leicht Richtung Petrol gezogen */
-  --palette-ink-925: #1A2022;
-  --palette-ink-900: #1B2427;   /* Referenz-Kartenfläche #182123 (M) */
-  --palette-ink-850: #222D30;
-  --palette-ink-800: #263134;
-  --palette-ink-700: #33424A;
-  --palette-ink-500: #5F7378;
-  --palette-grey-400: #8E9A9C;
-  --palette-grey-300: #ADB8BA;
-  --palette-grey-50:  #F3F5F5;
-  --palette-petrol-700: #2F6B79; /* Referenz-Akzent #226474 (M), aufgehellt für 6:1 mit Weiß */
-  --palette-petrol-600: #387A89;
-  --palette-petrol-400: #6FA0AD;
-  --palette-petrol-300: #8CBAC5;
+  --palette-navy-950: #080F1E;   /* Logo-Hintergrund */
+  --palette-navy-925: #0B1426;
+  --palette-navy-900: #101B30;
+  --palette-navy-850: #16233B;
+  --palette-navy-800: #1C2A44;
+  --palette-navy-700: #2A3B5A;
+  --palette-navy-500: #5B6E8F;
+  --palette-slate-400: #8E9BB2;
+  --palette-slate-300: #AEB9CC;
+  --palette-slate-50:  #F3F5F9;
+  --palette-blue-800: #004AA8;
+  --palette-blue-750: #004FB3;
+  --palette-blue-logo: #005FFE; /* Logo „Sardo Digital“ */
+  --palette-blue-700: #005BCC;   /* Markenblau · 6.2:1 mit Weiß */
+  --palette-blue-600: #1A6EDB;
+  --palette-blue-400: #5B9BF0;
+  --palette-blue-300: #8DBBF7;
   --palette-coral-300: #E39A8E;
+  --palette-red-700: #B42318;
+  --palette-light-50:  #F7F9FC;
+  --palette-light-100: #EEF2F8;
+  --palette-light-150: #E9EFF7;
+  --palette-light-200: #DFE7F2;
+  --palette-light-250: #DCE3EE;
+  --palette-light-300: #C2CDDC;
+  --palette-light-500: #7A889E;
+  --palette-ink-600: #566377;
+  --palette-ink-750: #39465B;
+  --palette-ink-950: #0B1220;
 
-  /* ---------- Farbe · Semantisch -------------------------------------- */
-  --color-background-primary:   var(--palette-ink-950); /* Seitenhintergrund */
-  --color-background-secondary: var(--palette-ink-925); /* Footer */
-  --color-surface-card:         var(--palette-ink-900); /* Panels, Badges, Formular */
-  --color-surface-raised:       var(--palette-ink-850); /* Inputs, Hover auf Flächen */
-  --color-text-primary:   var(--palette-grey-50);   /* 16.0:1 auf bg · 14.5:1 auf card */
-  --color-text-secondary: var(--palette-grey-300);  /*  8.6:1 auf bg ·  7.8:1 auf card */
-  --color-text-muted:     var(--palette-grey-400);  /*  6.0:1 auf bg ·  5.5:1 auf card */
-  --color-text-on-accent: #FFFFFF;                  /*  6.0:1 auf accent-primary */
-  --color-accent-primary: var(--palette-petrol-700); /* Primär-Button */
-  --color-interactive-hover: var(--palette-petrol-600); /* Primär-Button Hover · 4.9:1 mit Weiß */
-  --color-accent-text:    var(--palette-petrol-400); /* kursive Headline-Akzente, Eyebrows · 6.1:1 */
-  --color-accent-strong:  var(--palette-petrol-300); /* Links, Fokus · 8.3:1 */
-  --color-border-subtle:  var(--palette-ink-800);   /* Trennlinien (dekorativ) */
-  --color-border-default: var(--palette-ink-700);   /* Secondary-Button, Kartenrahmen */
-  --color-border-control: var(--palette-ink-500);   /* Formularfelder · 3.5:1 (WCAG 1.4.11) */
-  --color-focus-ring:     var(--palette-petrol-300);
-  --color-feedback-error: var(--palette-coral-300); /* 7.7:1 auf bg */
-  --color-overlay-solid:  rgba(23, 26, 27, 1);
-  --color-overlay-strong: rgba(23, 26, 27, 0.86);   /* Referenz: Bild-Overlay 84 % (M) */
-  --color-overlay-half:   rgba(23, 26, 27, 0.5);
-  --color-overlay-none:   rgba(23, 26, 27, 0);
+  --color-brand: var(--palette-blue-logo); /* blaue Logo-Teile, in beiden Themes · 3.7:1 auf Navy, 4.9:1 auf Hell */
+  --color-text-on-accent: #FFFFFF;
+  --color-accent-primary: var(--palette-blue-700); /* Primär-Button · 6.2:1 mit Weiß */
+}
 
+/* ---------- Dark (Standard) ------------------------------------------- */
+:root {
+  color-scheme: dark;
+  --color-background-primary:   var(--palette-navy-950); /* Seitenhintergrund */
+  --color-background-secondary: var(--palette-navy-925); /* Footer */
+  --color-surface-card:         var(--palette-navy-900); /* Panels, Badges, Formular */
+  --color-surface-raised:       var(--palette-navy-850); /* Inputs, Hover auf Flächen */
+  --color-text-primary:   var(--palette-slate-50);   /* 17.5:1 auf bg · 15.8:1 auf card */
+  --color-text-secondary: var(--palette-slate-300);  /*  9.7:1 auf bg ·  8.7:1 auf card */
+  --color-text-muted:     var(--palette-slate-400);  /*  6.8:1 auf bg ·  6.1:1 auf card */
+  --color-interactive-hover: var(--palette-blue-600); /* Primär-Button Hover · 4.9:1 mit Weiß */
+  --color-accent-text:    var(--palette-blue-400);  /* kursive Headline-Akzente, Eyebrows · 6.7:1 */
+  --color-accent-strong:  var(--palette-blue-300);  /* Links, Fokus · 9.6:1 */
+  --color-border-subtle:  var(--palette-navy-800);  /* Trennlinien (dekorativ) */
+  --color-border-default: var(--palette-navy-700);  /* Secondary-Button, Kartenrahmen */
+  --color-border-control: var(--palette-navy-500);  /* Formularfelder · 3.7:1 (WCAG 1.4.11) */
+  --color-focus-ring:     var(--palette-blue-300);
+  --color-feedback-error: var(--palette-coral-300); /* 8.5:1 auf bg */
+  --color-overlay-solid:  rgba(8, 15, 30, 1);
+  --color-overlay-strong: rgba(8, 15, 30, 0.86);
+  --color-overlay-half:   rgba(8, 15, 30, 0.5);
+  --color-overlay-none:   rgba(8, 15, 30, 0);
+}
+
+/* ---------- Light --------------------------------------------------------
+   Zweimal definiert: per Systemeinstellung (ohne explizite Wahl) und per
+   Umschalter. Beide Blöcke synchron halten. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --color-background-primary:   var(--palette-light-50);
+    --color-background-secondary: var(--palette-light-100);
+    --color-surface-card:         var(--palette-light-150);
+    --color-surface-raised:       var(--palette-light-200);
+    --color-text-primary:   var(--palette-ink-950);  /* 17.8:1 auf bg */
+    --color-text-secondary: var(--palette-ink-750);  /*  9.0:1 auf bg */
+    --color-text-muted:     var(--palette-ink-600);  /*  5.8:1 auf bg · 4.9:1 auf raised */
+    --color-interactive-hover: var(--palette-blue-800); /* 8.3:1 mit Weiß */
+    --color-accent-text:    var(--palette-blue-700); /* 5.9:1 auf bg */
+    --color-accent-strong:  var(--palette-blue-750); /* 7.2:1 auf bg */
+    --color-border-subtle:  var(--palette-light-250);
+    --color-border-default: var(--palette-light-300);
+    --color-border-control: var(--palette-light-500); /* 3.4:1 auf bg */
+    --color-focus-ring:     var(--palette-blue-750);
+    --color-feedback-error: var(--palette-red-700);  /* 6.2:1 auf bg */
+    --color-overlay-solid:  rgba(247, 249, 252, 1);
+    --color-overlay-strong: rgba(247, 249, 252, 0.86);
+    --color-overlay-half:   rgba(247, 249, 252, 0.5);
+    --color-overlay-none:   rgba(247, 249, 252, 0);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-background-primary:   var(--palette-light-50);
+  --color-background-secondary: var(--palette-light-100);
+  --color-surface-card:         var(--palette-light-150);
+  --color-surface-raised:       var(--palette-light-200);
+  --color-text-primary:   var(--palette-ink-950);
+  --color-text-secondary: var(--palette-ink-750);
+  --color-text-muted:     var(--palette-ink-600);
+  --color-interactive-hover: var(--palette-blue-800);
+  --color-accent-text:    var(--palette-blue-700);
+  --color-accent-strong:  var(--palette-blue-750);
+  --color-border-subtle:  var(--palette-light-250);
+  --color-border-default: var(--palette-light-300);
+  --color-border-control: var(--palette-light-500);
+  --color-focus-ring:     var(--palette-blue-750);
+  --color-feedback-error: var(--palette-red-700);
+  --color-overlay-solid:  rgba(247, 249, 252, 1);
+  --color-overlay-strong: rgba(247, 249, 252, 0.86);
+  --color-overlay-half:   rgba(247, 249, 252, 0.5);
+  --color-overlay-none:   rgba(247, 249, 252, 0);
+}
+
+:root {
   /* ---------- Typografie ----------------------------------------------- */
   --font-sans: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { content } from "@/lib/content";
 import { siteUrl, isIndexable } from "@/lib/site";
+import { ThemeScript } from "@/components/layout/ThemeToggle/ThemeScript";
 import "@/styles/tokens.css";
 import "./globals.css";
 
@@ -38,12 +39,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#171A1B", // = --color-background-primary
+  // = --color-background-primary je Theme
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#080F1E" },
+    { media: "(prefers-color-scheme: light)", color: "#F7F9FC" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="de" className={instrumentSans.variable}>
+    // data-theme wird vor der Hydration vom ThemeScript gesetzt
+    <html lang="de" className={instrumentSans.variable} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Zum Inhalt springen

@@ -1,0 +1,18 @@
+.toggle {
+  display: inline-grid; place-items: center; flex: none;
+  width: 2.75rem; height: 2.75rem; padding: 0;
+  background: var(--color-surface-card); color: var(--color-text-primary);
+  border: 0; border-radius: var(--radius-pill); cursor: pointer;
+  transition: background-color var(--duration-short) var(--ease-standard);
+}
+.toggle:hover { background: var(--color-surface-raised); }
+.icon { width: 1.125rem; height: 1.125rem; }
+
+/* Angezeigt wird das Ziel: im Dark-Theme die Sonne, im Light-Theme der Mond */
+.moon { display: none; }
+:global(:root[data-theme="light"]) .sun { display: none; }
+:global(:root[data-theme="light"]) .moon { display: block; }
+@media (prefers-color-scheme: light) {
+  :global(:root:not([data-theme="dark"])) .sun { display: none; }
+  :global(:root:not([data-theme="dark"])) .moon { display: block; }
+}

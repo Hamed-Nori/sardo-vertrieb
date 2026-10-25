@@ -25,8 +25,12 @@
 .navLink[aria-current="true"]::after { transform: scaleX(1); }
 .cta { display: none; }
 
+/* Theme-Umschalter + Menü-Button */
+.actions { display: flex; align-items: center; gap: var(--space-2); margin-left: auto; }
+.actionsEnd { margin-left: auto; }
+
 .toggle {
-  display: inline-grid; place-items: center; margin-left: auto;
+  display: inline-grid; place-items: center;
   width: 2.75rem; height: 2.75rem; padding: 0;
   background: var(--color-surface-card); border: 0; border-radius: var(--radius-pill); cursor: pointer;
 }
@@ -58,7 +62,8 @@
 
 @media (min-width: 768px) {
   .cta { display: inline-flex; margin-left: auto; }
-  .toggle { margin-left: 0; }
+  .actions { margin-left: 0; }
+  .actionsEnd { margin-left: auto; }
 }
 @media (min-width: 992px) {
   .nav { display: block; }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { content } from "@/lib/content";
 import { Container } from "@/components/ui/Container/Container";
-import { Wordmark } from "../Wordmark/Wordmark";
+import { Logo } from "../Logo/Logo";
 import styles from "./SiteFooter.module.css";
 
 const navLabels: Record<string, string> = { Seite: "Seitennavigation", Rechtliches: "Rechtliches" };
@@ -19,7 +19,7 @@ export function SiteFooter() {
     <footer className={styles.footer}>
       <Container className={styles.inner}>
         <div>
-          <Wordmark />
+          <Logo />
           <p className={styles.tagline}>{footer.claim}</p>
         </div>
         {footer.columns.map((column) => (

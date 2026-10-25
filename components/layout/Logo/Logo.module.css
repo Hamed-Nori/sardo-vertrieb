@@ -1,0 +1,4 @@
+.link { display: inline-flex; align-items: center; color: var(--color-text-primary); }
+.logo { display: block; height: 2.5rem; width: auto; }
+.light { fill: currentColor; }
+.blue { fill: var(--color-brand); }

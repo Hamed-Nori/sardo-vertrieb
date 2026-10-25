@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Link } from "@/types/content";
 import { Button } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
-import { Wordmark } from "../Wordmark/Wordmark";
+import { Logo } from "../Logo/Logo";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 import styles from "./SiteHeader.module.css";
 
@@ -78,7 +79,7 @@ export function SiteHeader({ items, cta }: Props) {
   return (
     <header className={headerClass}>
       <Container className={styles.inner}>
-        <Wordmark />
+        <Logo />
 
         <nav className={styles.nav} aria-label="Hauptnavigation">
           <ul className={styles.navList}>
@@ -100,20 +101,23 @@ export function SiteHeader({ items, cta }: Props) {
           {cta.label}
         </Button>
 
-        <button
-          ref={toggleRef}
-          className={styles.toggle}
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="visually-hidden">{menuOpen ? "Menü schließen" : "Menü öffnen"}</span>
-          <span className={styles.toggleIcon} aria-hidden="true">
-            <span />
-            <span />
-          </span>
-        </button>
+        <div className={styles.actions}>
+          <ThemeToggle />
+          <button
+            ref={toggleRef}
+            className={styles.toggle}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="visually-hidden">{menuOpen ? "Menü schließen" : "Menü öffnen"}</span>
+            <span className={styles.toggleIcon} aria-hidden="true">
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
       </Container>
 
       <MobileMenu

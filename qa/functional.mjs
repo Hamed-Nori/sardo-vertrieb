@@ -82,6 +82,27 @@ const browser = await chromium.launch();
   await page.close();
 }
 
+// 4b · Theme-Umschalter: Systemeinstellung, Wechsel, Speicherung
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, colorScheme: "dark" });
+  const page = await ctx.newPage();
+  await page.goto(SITE, { waitUntil: "networkidle" });
+  const bg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  check("System dunkel → dunkler Grund", (await bg()) === "rgb(8, 15, 30)", await bg());
+  await page.getByRole("button", { name: "Helles oder dunkles Design wählen" }).click();
+  check("Umschalter → helles Design", (await bg()) === "rgb(247, 249, 252)", await bg());
+  await page.reload({ waitUntil: "networkidle" });
+  check("Wahl bleibt nach Neuladen erhalten", (await bg()) === "rgb(247, 249, 252)", await bg());
+  await page.goto(new URL("/impressum", SITE).toString(), { waitUntil: "networkidle" });
+  check("Wahl gilt auch auf Unterseiten", (await bg()) === "rgb(247, 249, 252)", await bg());
+  await ctx.close();
+  const light = await browser.newPage({ colorScheme: "light" });
+  await light.goto(SITE, { waitUntil: "networkidle" });
+  const lbg = await light.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  check("System hell → helles Design", lbg === "rgb(247, 249, 252)", lbg);
+  await light.close();
+}
+
 // 5 · Formular (Demo-Modus)
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });

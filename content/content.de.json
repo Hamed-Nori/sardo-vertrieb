@@ -51,10 +51,10 @@
       "href": "#leistungen"
     },
     "image": {
-      "src": "/images/hero-shift4-one-terminal-1920.webp",
-      "alt": "Kartenzahlungsterminal Shift4 One auf einem dunklen Geschäftstresen",
-      "width": 1920,
-      "height": 1080
+      "src": "/images/terminal-counter-success.webp",
+      "alt": "Kartenzahlungsterminal mit der Anzeige „Zahlung erfolgreich“ auf einem dunklen Marmortresen",
+      "width": 1672,
+      "height": 941
     }
   },
   "services": {
@@ -72,13 +72,13 @@
           "label": "Beratung anfragen",
           "href": "#kontakt"
         },
-        "variant": "overlay",
+        "variant": "stacked",
         "image": {
-          "src": "/images/payment-cards-contactless-900.webp",
-          "alt": "Mehrere Zahlungskarten mit Chip und Kontaktlos-Symbol auf einer dunklen Holzfläche",
-          "width": 900,
-          "height": 1240,
-          "position": "50% 62%"
+          "src": "/images/terminal-success-closeup.webp",
+          "alt": "Nahaufnahme eines Kartenzahlungsterminals mit bestätigter Zahlung über 5,50 €",
+          "width": 1254,
+          "height": 1254,
+          "position": "50% 50%"
         }
       },
       {
@@ -91,11 +91,11 @@
         },
         "variant": "stacked",
         "image": {
-          "src": "/images/retail-terminal-checkout-900.webp",
-          "alt": "Zahlungsterminal an der Kasse eines Modegeschäfts, auf dem Display die Zahlarten Karte, Handy und Uhr",
-          "width": 900,
-          "height": 1240,
-          "position": "50% 78%"
+          "src": "/images/terminal-tip-zero-fee.webp",
+          "alt": "Kartenzahlungsterminal mit Trinkgeldauswahl auf dem Display, daneben der Hinweis „Terminal & Grundgebühr 0 €“",
+          "width": 1448,
+          "height": 1086,
+          "position": "50% 60%"
         }
       }
     ],
@@ -140,11 +140,11 @@
       "href": "#faq"
     },
     "image": {
-      "src": "/images/shift4-one-payment-success-900.webp",
-      "alt": "Zahlungsterminal Shift4 One mit der Anzeige „Zahlung erfolgreich“ und ausgedrucktem Beleg",
-      "width": 900,
-      "height": 1240,
-      "position": "50% 42%",
+      "src": "/images/terminal-tip-selection.webp",
+      "alt": "Kartenzahlungsterminal mit Trinkgeldauswahl und einem Gesamtbetrag von 5,50 € auf dem Display",
+      "width": 1122,
+      "height": 1402,
+      "position": "50% 50%",
       "badge": "Illustrative Darstellung"
     },
     "stats": [

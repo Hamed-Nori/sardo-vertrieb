@@ -23,12 +23,15 @@ SITE_URL=http://localhost:3100/ npm run qa:functional      # Formular, API-Schut
 ```
 
 Ergebnisse liegen in `qa/output/` (Screenshots, Diff-Bilder, `report.json`).
+Hinweis: Seit der Umstellung auf Logo-Blau und Navy weicht die Farbe bewusst vom Prototyp ab; `qa:visual` eignet sich jetzt nur noch für Layout-Vergleiche (Höhen und Positionen der Sections).
 
 ## Struktur
 
 | Pfad | Inhalt |
 |---|---|
-| `styles/tokens.css` | 1 : 1 Kopie von `design-system/tokens.css` (`--font-sans` wird in `app/globals.css` auf next/font umgestellt) |
+| `styles/tokens.css` | Basis `design-system/tokens.css`; Farben auf Logo-Blau `#005BCC` + Navy umgestellt, Dark- und Light-Theme (`--font-sans` wird in `app/globals.css` auf next/font umgestellt) |
+| `public/brand/logo.svg` | Logo „Sardo Digital“ (vektorisiert): blaue Teile in `--color-brand`, weiße Teile in Textfarbe |
+| `components/layout/ThemeToggle` | Theme-Umschalter + Init-Skript (Standard: Systemeinstellung, Wahl in `localStorage`) |
 | `content/content.de.json` | 1 : 1 Kopie aller Texte, typisiert über `types/content.ts` |
 | `components/ui` | wiederverwendbare Bausteine (Button, Eyebrow, Panel, ImageCard, Field …) |
 | `components/layout` | SiteHeader + MobileMenu (Client), SiteFooter, Wordmark, LegalPage |
