@@ -35,7 +35,7 @@
     "eyebrow": "Sardo Digital · Payment-Lösungen",
     "title": {
       "text": "Digitale Bezahllösungen",
-      "accent": "für den Geschäftsalltag"
+      "accent": "für deinen Geschäftsalltag"
     },
     "lead": "Moderne Kartenzahlung für Gastronomie, Einzelhandel und Dienstleistungsunternehmen. Mit persönlicher Beratung und Lösungen, die zu deinem Geschäftsalltag passen.",
     "checklist": [
@@ -243,14 +243,9 @@
       "title": "Beratungsanfrage",
       "fields": {
         "name": {
-          "label": "Dein Name",
+          "label": "Vollständiger Name",
           "required": true,
-          "error": "Bitte gib deinen Namen ein."
-        },
-        "company": {
-          "label": "Unternehmen",
-          "required": true,
-          "error": "Bitte gib dein Unternehmen an."
+          "error": "Bitte gib deinen vollständigen Namen ein."
         },
         "email": {
           "label": "E-Mail-Adresse",
@@ -258,11 +253,22 @@
           "errorEmpty": "Bitte gib deine E-Mail-Adresse ein.",
           "errorInvalid": "Bitte gib eine gültige E-Mail-Adresse ein, z. B. name@unternehmen.de."
         },
+        "phone": {
+          "label": "Telefonnummer",
+          "required": true,
+          "errorEmpty": "Bitte gib deine Telefonnummer ein.",
+          "errorInvalid": "Bitte gib eine gültige Telefonnummer ein, z. B. 0177 1234567."
+        },
+        "company": {
+          "label": "Unternehmen",
+          "required": false,
+          "optionalLabel": "(optional)"
+        },
         "topic": {
           "label": "Worum geht es?",
-          "required": true,
+          "required": false,
+          "optionalLabel": "(optional)",
           "placeholder": "Bitte auswählen",
-          "error": "Bitte wähle aus, worum es geht.",
           "options": [
             {
               "value": "payment",
@@ -286,15 +292,19 @@
           "label": "Deine Nachricht",
           "required": false,
           "optionalLabel": "(optional)"
+        },
+        "privacy": {
+          "label": "Ich habe die Datenschutzerklärung gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden.",
+          "required": true,
+          "error": "Bitte stimme der Datenschutzerklärung zu."
         }
       },
-      "legal": "Mit * markierte Felder sind Pflichtfelder. Informationen zur Verarbeitung deiner Daten findest du in der Datenschutzerklärung.",
+      "legal": "Mit * markierte Felder sind Pflichtfelder.",
       "submit": "Beratungsanfrage senden",
       "status": {
         "demo": "Das Formular ist noch nicht freigeschaltet. Schreib mir gerne direkt per WhatsApp.",
         "invalid": "Bitte prüfe die markierten Felder.",
-        "success": "Danke! Deine Anfrage ist angekommen. Ich melde mich in Kürze bei dir.",
-        "error": "Das hat leider nicht geklappt. Bitte versuche es später erneut."
+        "error": "Das hat leider nicht geklappt. Bitte versuche es später erneut oder schreib mir direkt per WhatsApp."
       }
     },
     "backgroundImage": {
@@ -302,6 +312,11 @@
       "width": 900,
       "height": 1240,
       "position": "50% 40%"
+    },
+    "thanks": {
+      "eyebrow": "Danke",
+      "title": "Deine Anfrage ist angekommen.",
+      "lead": "Danke für dein Vertrauen! Ich melde mich in Kürze persönlich bei dir, um einen Termin auszumachen."
     }
   },
   "footer": {
@@ -359,5 +374,42 @@
     "number": "491775359611",
     "label": "WhatsApp",
     "ariaLabel": "Per WhatsApp schreiben (öffnet in neuem Fenster)"
+  },
+  "company": {
+    "owner": "Daniele Sardo",
+    "name": "Sardo Vertrieb",
+    "legalForm": "Einzelunternehmen",
+    "street": "Weiterstädter Straße 39",
+    "zip": "64291",
+    "city": "Darmstadt",
+    "phone": "+49 177 5359611",
+    "phoneHref": "tel:+491775359611",
+    "email": "danielesardo@live.it",
+    "tax": "Kleinunternehmer gemäß § 19 UStG – es wird keine Umsatzsteuer berechnet und ausgewiesen."
+  },
+  "cookieConsent": {
+    "title": "Cookies & Datenschutz",
+    "text": "Ich verwende Cookies und ähnliche Technologien. Notwendige sorgen dafür, dass die Website funktioniert. Mit deiner Zustimmung nutze ich zusätzlich Statistik- und Marketing-Dienste, um die Website zu verbessern. Deine Auswahl kannst du jederzeit unter „Cookie-Einstellungen“ im Footer ändern. Mehr in der Datenschutzerklärung.",
+    "privacyLink": "Datenschutzerklärung",
+    "acceptAll": "Alle akzeptieren",
+    "necessaryOnly": "Nur notwendige",
+    "settings": "Einstellungen",
+    "save": "Auswahl speichern",
+    "alwaysActive": "Immer aktiv",
+    "footerLink": "Cookie-Einstellungen",
+    "categories": {
+      "necessary": {
+        "title": "Notwendig",
+        "text": "Für den Betrieb der Website erforderlich, z. B. das Speichern deiner Hell/Dunkel-Einstellung und deiner Cookie-Auswahl."
+      },
+      "statistics": {
+        "title": "Statistik",
+        "text": "Hilft mir zu verstehen, wie Besucher die Website nutzen – z. B. welche Seiten aufgerufen werden –, damit ich sie verbessern kann."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Ermöglicht es, Werbung auf anderen Plattformen passend auszuspielen und deren Erfolg zu messen."
+      }
+    }
   }
 }

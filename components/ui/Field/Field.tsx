@@ -34,6 +34,50 @@ export function Field({ label, id, required, optionalLabel, error, children }: F
   );
 }
 
+type CheckboxFieldProps = {
+  id: string;
+  name: string;
+  /** Beschriftung, darf Links enthalten */
+  label: React.ReactNode;
+  required?: boolean;
+  error?: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+};
+
+/** Einwilligungs-Häkchen mit Fehlermeldung (Label rechts, Pflichtstern wie bei Feldern) */
+export function CheckboxField({ id, name, label, required, error, checked, onChange }: CheckboxFieldProps) {
+  return (
+    <div className={error ? `${styles.check} ${styles.invalid}` : styles.check}>
+      <input
+        className={styles.checkbox}
+        type="checkbox"
+        id={id}
+        name={name}
+        required={required}
+        checked={checked}
+        aria-invalid={Boolean(error)}
+        aria-describedby={errorId(id)}
+        onChange={(event) => onChange(event.target.checked)}
+      />
+      <label className={styles.checkLabel} htmlFor={id}>
+        {label}
+        {required && (
+          <>
+            {" "}
+            <span className={styles.required} aria-hidden="true">
+              *
+            </span>
+          </>
+        )}
+      </label>
+      <p className={`${styles.error} ${styles.checkError}`} id={errorId(id)} hidden={!error}>
+        {error}
+      </p>
+    </div>
+  );
+}
+
 /** Verknüpft ein Control mit seiner Fehlermeldung */
 export function errorId(id: string) {
   return `${id}-error`;

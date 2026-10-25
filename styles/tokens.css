@@ -216,7 +216,7 @@
   --radius-pill: 999px;  /* Buttons (M: 25px bei 45–59px Höhe = Pille) */
   --border-width-hairline: 1px;
   --border-width-strong: 2px;
-  --shadow-menu: 0 24px 48px -24px rgba(0, 0, 0, 0.6); /* nur Mobile-Menü */
+  --shadow-menu: 0 24px 48px -24px rgba(0, 0, 0, 0.6); /* Mobile-Menü, Cookie-Banner */
 
   /* ---------- Ebenen ------------------------------------------------ */
   --z-base: 0;

@@ -3,8 +3,9 @@
 .tagline { margin-top: var(--space-3); color: var(--color-text-muted); font-size: var(--type-small-size); max-width: 22rem; }
 .heading { color: var(--color-text-primary); font-size: var(--type-small-size); font-weight: 600; }
 .list { display: grid; gap: var(--space-2); margin-top: var(--space-4); }
-.list a { color: var(--color-text-muted); font-size: var(--type-small-size); transition: color var(--duration-short) var(--ease-standard); }
-.list a:hover { color: var(--color-text-primary); }
+.list a, .list button { color: var(--color-text-muted); font-size: var(--type-small-size); transition: color var(--duration-short) var(--ease-standard); }
+.list button { padding: 0; background: none; border: 0; text-align: left; line-height: inherit; cursor: pointer; }
+.list a:hover, .list button:hover { color: var(--color-text-primary); }
 .base {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-6);
   /* Unten Platz für den schwebenden WhatsApp-Button (3.5rem + Abstand) */

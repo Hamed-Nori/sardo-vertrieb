@@ -30,3 +30,27 @@
 .error { color: var(--color-feedback-error); font-size: var(--type-small-size); line-height: var(--type-small-line); }
 .error::before { content: "! "; font-weight: 700; }
 .invalid .control { border-color: var(--color-feedback-error); }
+
+/* Einwilligungs-Häkchen (Datenschutz) */
+.check { display: grid; grid-template-columns: 1.25rem 1fr; gap: var(--space-2) var(--space-3); align-items: start; }
+.checkbox {
+  appearance: none; display: grid; place-content: center;
+  width: 1.25rem; height: 1.25rem; margin: 0.1rem 0 0;
+  background: var(--color-background-primary);
+  border: var(--border-width-hairline) solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-short) var(--ease-standard), border-color var(--duration-short) var(--ease-standard);
+}
+.checkbox::before {
+  content: ""; width: 0.35rem; height: 0.65rem; margin-top: -0.15rem;
+  border: solid var(--color-text-on-accent); border-width: 0 2px 2px 0;
+  transform: rotate(45deg); opacity: 0;
+}
+.checkbox:hover { border-color: var(--color-text-muted); }
+.checkbox:checked { background: var(--color-accent-primary); border-color: var(--color-accent-primary); }
+.checkbox:checked::before { opacity: 1; }
+.checkbox:focus-visible { outline: var(--border-width-strong) solid var(--color-focus-ring); outline-offset: 2px; }
+.invalid .checkbox { border-color: var(--color-feedback-error); }
+.checkLabel { color: var(--color-text-secondary); font-size: var(--type-small-size); line-height: var(--type-small-line); cursor: pointer; }
+.checkError { grid-column: 2; }

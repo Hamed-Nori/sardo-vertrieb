@@ -2,6 +2,9 @@
 
 export type Link = { label: string; href: string };
 
+/** Text einer einfachen Unterseite (z. B. Dankeseite) */
+export type SimplePage = { eyebrow: string; title: string; lead: string };
+
 /** Zweistimmige Headline: Text + optionaler kursiver Akzent */
 export type Headline = { text: string; accent?: string };
 
@@ -78,24 +81,51 @@ export type Content = {
       title: string;
       fields: {
         name: { label: string; required: boolean; error: string };
-        company: { label: string; required: boolean; error: string };
         email: { label: string; required: boolean; errorEmpty: string; errorInvalid: string };
+        phone: { label: string; required: boolean; errorEmpty: string; errorInvalid: string };
+        company: { label: string; required: boolean; optionalLabel: string };
         topic: {
           label: string;
           required: boolean;
+          optionalLabel: string;
           placeholder: string;
-          error: string;
           options: { value: string; label: string }[];
         };
         message: { label: string; required: boolean; optionalLabel: string };
+        privacy: { label: string; required: boolean; error: string };
       };
       legal: string;
       submit: string;
-      status: { demo: string; invalid: string; success: string; error: string };
+      status: { demo: string; invalid: string; error: string };
     };
+    thanks: SimplePage;
     backgroundImage: Img;
   };
   whatsapp: { number: string; label: string; ariaLabel: string };
+  company: {
+    owner: string;
+    name: string;
+    legalForm: string;
+    street: string;
+    zip: string;
+    city: string;
+    phone: string;
+    phoneHref: string;
+    email: string;
+    tax: string;
+  };
+  cookieConsent: {
+    title: string;
+    text: string;
+    privacyLink: string;
+    acceptAll: string;
+    necessaryOnly: string;
+    settings: string;
+    save: string;
+    alwaysActive: string;
+    footerLink: string;
+    categories: Record<"necessary" | "statistics" | "marketing", { title: string; text: string }>;
+  };
   footer: {
     claim: string;
     columns: { heading: string; links: Link[] }[];

@@ -10,7 +10,6 @@
   text-wrap: balance;
 }
 .lead { margin-top: var(--stack-heading-text); font-size: var(--type-body-lg-size); line-height: var(--type-body-lg-line); max-width: 33rem; }
-.whatsappIcon { width: 1.25rem; height: 1.25rem; flex: none; }
 .media { position: relative; order: 2; aspect-ratio: 4 / 3; margin-top: calc(var(--space-8) * -1); }
 .image { object-fit: cover; object-position: 84% 50%; }
 .media::after {

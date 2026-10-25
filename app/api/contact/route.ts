@@ -13,6 +13,7 @@ function clientIp(request: Request): string {
   return forwarded?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
 }
 
+/** Anfrage prüfen (inkl. Datenschutz-Häkchen) und an Daniele senden */
 export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return json({ error: "unsupported_media_type" }, 415);
@@ -34,23 +35,22 @@ export async function POST(request: Request) {
 
   const parsed = contactRequestSchema.safeParse(body);
   if (!parsed.success) {
-    const fields = new Set<ContactField>();
+    const fields = new Set<ContactField | "privacy">();
     for (const issue of parsed.error.issues) {
       const key = issue.path[0];
       if (key === "website") return json({ ok: true }, 200); // Honeypot: Bots erhalten keinen Hinweis
-      if (typeof key === "string" && key !== "startedAt") fields.add(key as ContactField);
+      if (typeof key === "string" && key !== "startedAt") fields.add(key as ContactField | "privacy");
     }
     return json({ fieldErrors: [...fields] }, 400);
   }
 
-  const { startedAt, name, company, email, topic, message } = parsed.data;
-  const data = { name, company, email, topic, message };
+  const { startedAt, name, email, phone, company, topic, message } = parsed.data;
   if (Date.now() - startedAt < MIN_FILL_TIME_MS) return json({ ok: true }, 200); // zu schnell → still verwerfen
 
   if (!isMailConfigured()) return json({ error: "not_configured" }, 503);
 
   try {
-    await sendContactMail(data);
+    await sendContactMail({ name, email, phone, company, topic, message });
   } catch (error) {
     console.error("[contact] Versand fehlgeschlagen", error instanceof Error ? error.message : error);
     return json({ error: "send_failed" }, 502);

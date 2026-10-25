@@ -40,6 +40,15 @@ Hinweis: Seit der Umstellung auf Logo-Blau und Navy weicht die Farbe bewusst vom
 | `lib/contact-schema.ts` | Zod-Schema für Client und Server |
 | `app/api/contact/route.ts` | POST-Handler: Content-Type, Größenlimit, Honeypot, Mindest-Ausfüllzeit, Rate-Limit, Resend |
 
+## Kontaktformular
+
+Pflicht: vollständiger Name, Telefonnummer, E-Mail und das Häkchen zur Datenschutzerklärung; Unternehmen,
+Thema und Nachricht sind optional. Nach dem Absenden geht die Anfrage mit allen Angaben direkt an
+`CONTACT_TO` (Reply-To = Kunde), der Browser zeigt die Dankeseite `/danke`.
+
+Für `qa:functional` den Testserver mit `CONTACT_TO=delivered@resend.dev` starten, damit Testanfragen
+nicht im echten Postfach landen.
+
 ## Kontaktformular aktivieren
 
 1. `.env.example` nach `.env.local` (bzw. in die Hosting-Umgebung) übernehmen.

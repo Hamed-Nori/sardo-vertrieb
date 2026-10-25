@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { Content } from "@/types/content";
 import {
   contactFieldsSchema,
+  requiredFields,
   type ContactErrorResponse,
   type ContactField,
 } from "@/lib/contact-schema";
 import { Button } from "@/components/ui/Button/Button";
-import { errorId, Field, Input, Select, Textarea } from "@/components/ui/Field/Field";
+import { CheckboxField, errorId, Field, Input, Select, Textarea } from "@/components/ui/Field/Field";
 import { TextLink } from "@/components/ui/TextLink/TextLink";
 import styles from "./ContactForm.module.css";
 
@@ -21,11 +23,11 @@ type Props = {
 } & Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">;
 
 type Values = Record<ContactField, string>;
-type Errors = Partial<Record<ContactField, string>>;
-type Status = "idle" | "invalid" | "demo-sent" | "submitting" | "success" | "error";
+type Errors = Partial<Record<ContactField | "privacy", string>>;
+type Status = "idle" | "invalid" | "demo-sent" | "submitting" | "error";
 
-const REQUIRED: ContactField[] = ["name", "company", "email", "topic"];
-const EMPTY: Values = { name: "", company: "", email: "", topic: "", message: "" };
+const REQUIRED: readonly ContactField[] = requiredFields;
+const EMPTY: Values = { name: "", email: "", phone: "", company: "", topic: "", message: "" };
 
 function messageFor(field: ContactField, value: string, form: FormContent): string {
   const f = form.fields;
@@ -34,12 +36,10 @@ function messageFor(field: ContactField, value: string, form: FormContent): stri
   switch (field) {
     case "name":
       return f.name.error;
-    case "company":
-      return f.company.error;
     case "email":
       return value.trim() ? f.email.errorInvalid : f.email.errorEmpty;
-    case "topic":
-      return f.topic.error;
+    case "phone":
+      return value.trim() ? f.phone.errorInvalid : f.phone.errorEmpty;
     default:
       return "";
   }
@@ -64,19 +64,16 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
   const [values, setValues] = useState<Values>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [privacy, setPrivacy] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const touched = useRef(new Set<ContactField>());
   const startedAt = useRef(0);
   const formRef = useRef<HTMLFormElement>(null);
-  const successRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
-
-  useEffect(() => {
-    if (status === "success") successRef.current?.focus();
-  }, [status]);
 
   const validate = (field: ContactField, value: string) => {
     if (!REQUIRED.includes(field)) return true;
@@ -85,7 +82,7 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
     return !message;
   };
 
-  const focusField = (field: ContactField) => {
+  const focusField = (field: ContactField | "privacy") => {
     const control = formRef.current?.elements.namedItem(field);
     if (control instanceof HTMLElement) control.focus();
   };
@@ -103,14 +100,14 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
     const field = event.target.name as ContactField;
     const value = event.target.value;
     setValues((prev) => ({ ...prev, [field]: value }));
-    if (errors[field] || field === "topic") validate(field, value);
+    if (errors[field]) validate(field, value);
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (status === "submitting") return;
 
-    let firstInvalid: ContactField | null = null;
+    let firstInvalid: ContactField | "privacy" | null = null;
     const nextErrors: Errors = {};
     for (const field of REQUIRED) {
       const message = messageFor(field, values[field], form);
@@ -118,6 +115,10 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
         nextErrors[field] = message;
         firstInvalid ??= field;
       }
+    }
+    if (!privacy) {
+      nextErrors.privacy = form.fields.privacy.error;
+      firstInvalid ??= "privacy";
     }
     setErrors(nextErrors);
     if (firstInvalid) {
@@ -137,17 +138,18 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, website: honeypot, startedAt: startedAt.current }),
+        body: JSON.stringify({ ...values, privacy, website: honeypot, startedAt: startedAt.current }),
       });
       if (response.ok) {
-        setStatus("success");
+        router.push("/danke");
         return;
       }
       if (response.status === 400) {
         const data = (await response.json().catch(() => ({}))) as ContactErrorResponse;
         const serverErrors: Errors = {};
         for (const field of data.fieldErrors ?? []) {
-          serverErrors[field] = messageFor(field, values[field], form) || form.status.invalid;
+          serverErrors[field] =
+            field === "privacy" ? form.fields.privacy.error : messageFor(field, values[field], form) || form.status.invalid;
         }
         if (Object.keys(serverErrors).length) {
           setErrors(serverErrors);
@@ -161,21 +163,6 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
       setStatus("error");
     }
   };
-
-  if (status === "success") {
-    return (
-      <div
-        className={[styles.form, styles.success, className].filter(Boolean).join(" ")}
-        ref={successRef}
-        tabIndex={-1}
-        role="status"
-        {...(rest as React.HTMLAttributes<HTMLDivElement>)}
-      >
-        <h3 className={styles.title}>{form.title}</h3>
-        <p>{form.status.success}</p>
-      </div>
-    );
-  }
 
   const f = form.fields;
 
@@ -208,16 +195,17 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
             onBlur={onBlur}
           />
         </Field>
-        <Field label={f.company.label} id="f-company" required error={errors.company}>
+        <Field label={f.phone.label} id="f-phone" required error={errors.phone}>
           <Input
-            id="f-company"
-            name="company"
-            type="text"
-            autoComplete="organization"
+            id="f-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
             required
-            aria-describedby={errorId("f-company")}
-            invalid={Boolean(errors.company)}
-            value={values.company}
+            aria-describedby={errorId("f-phone")}
+            invalid={Boolean(errors.phone)}
+            value={values.phone}
             onChange={onChange}
             onBlur={onBlur}
           />
@@ -241,18 +229,25 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
         />
       </Field>
 
-      <Field label={f.topic.label} id="f-topic" required error={errors.topic}>
+      <Field label={f.company.label} id="f-company" optionalLabel={f.company.optionalLabel}>
+        <Input
+          id="f-company"
+          name="company"
+          type="text"
+          autoComplete="organization"
+          value={values.company}
+          onChange={onChange}
+        />
+      </Field>
+
+      <Field label={f.topic.label} id="f-topic" optionalLabel={f.topic.optionalLabel}>
         <Select
           id="f-topic"
           name="topic"
-          required
-          aria-describedby={errorId("f-topic")}
-          invalid={Boolean(errors.topic)}
           placeholder={f.topic.placeholder}
           options={f.topic.options}
           value={values.topic}
           onChange={onChange}
-          onBlur={onBlur}
         />
       </Field>
 
@@ -273,9 +268,20 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
         />
       </div>
 
-      <p className={styles.legal}>
-        <LinkedText text={form.legal} word="Datenschutzerklärung" href="/datenschutz" />
-      </p>
+      <CheckboxField
+        id="f-privacy"
+        name="privacy"
+        required
+        checked={privacy}
+        error={errors.privacy}
+        onChange={(checked) => {
+          setPrivacy(checked);
+          if (checked) setErrors((prev) => ({ ...prev, privacy: undefined }));
+        }}
+        label={<LinkedText text={f.privacy.label} word="Datenschutzerklärung" href="/datenschutz" />}
+      />
+
+      <p className={styles.legal}>{form.legal}</p>
 
       <Button variant="primary" block type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Wird gesendet …" : form.submit}
@@ -291,7 +297,7 @@ export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Pro
       </div>
       {status === "error" && (
         <p className={styles.error} role="alert">
-          {form.status.error}
+          <LinkedText text={form.status.error} word="WhatsApp" href={whatsappUrl} />
         </p>
       )}
     </form>

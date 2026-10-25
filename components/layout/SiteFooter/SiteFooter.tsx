@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { content } from "@/lib/content";
 import { Container } from "@/components/ui/Container/Container";
+import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 import { Logo } from "../Logo/Logo";
 import styles from "./SiteFooter.module.css";
 
@@ -31,6 +32,11 @@ export function SiteFooter() {
                   {link.href.startsWith("#") ? <a href={link.href}>{link.label}</a> : <Link href={link.href}>{link.label}</Link>}
                 </li>
               ))}
+              {column.heading === "Rechtliches" && (
+                <li>
+                  <CookieSettingsLink label={content.cookieConsent.footerLink} />
+                </li>
+              )}
             </ul>
           </nav>
         ))}

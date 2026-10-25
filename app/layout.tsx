@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { content } from "@/lib/content";
 import { siteUrl, isIndexable } from "@/lib/site";
 import { ThemeScript } from "@/components/layout/ThemeToggle/ThemeScript";
+import { CookieConsent } from "@/components/consent/CookieConsent";
 import "@/styles/tokens.css";
 import "./globals.css";
 
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Zum Inhalt springen
         </a>
         {children}
+        <CookieConsent texts={content.cookieConsent} />
       </body>
     </html>
   );

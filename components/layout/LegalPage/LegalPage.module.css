@@ -2,3 +2,24 @@
 .title { color: var(--color-text-primary); font-size: var(--type-h1-size); line-height: var(--type-h1-line); font-weight: var(--type-heading-weight); margin-top: var(--space-5); }
 .todo { margin-top: var(--space-6); padding: var(--space-4) var(--space-5); border: var(--border-width-hairline) dashed var(--color-border-default); border-radius: var(--radius-sm); color: var(--color-accent-strong); font-size: var(--type-small-size); }
 .back { margin-top: var(--space-8); }
+
+/* Fließtext für Impressum und Datenschutz */
+.prose { margin-top: var(--space-8); max-width: var(--container-text); color: var(--color-text-secondary); }
+.prose h2 {
+  margin-top: var(--space-8); color: var(--color-text-primary);
+  font-size: var(--type-h3-size); line-height: var(--type-h3-line); font-weight: var(--type-heading-weight); letter-spacing: var(--type-h3-tracking);
+}
+.prose h2:first-child { margin-top: 0; }
+.prose h3 { margin-top: var(--space-6); color: var(--color-text-primary); font-size: var(--type-h4-size); line-height: var(--type-h4-line); font-weight: 500; }
+.prose p, .prose ul, .prose address { margin-top: var(--space-3); }
+.prose address { font-style: normal; }
+.prose ul { padding-left: var(--space-5); list-style: disc; }
+.prose li + li { margin-top: var(--space-1); }
+.prose a { color: var(--color-accent-strong); text-decoration: underline; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+.prose a:hover { color: var(--color-text-primary); }
+.prose small { display: block; margin-top: var(--space-8); color: var(--color-text-muted); font-size: var(--type-caption-size); }
+.prose button {
+  padding: 0; background: none; border: 0; font: inherit; cursor: pointer;
+  color: var(--color-accent-strong); text-decoration: underline; text-underline-offset: 0.2em;
+}
+.prose button:hover { color: var(--color-text-primary); }
