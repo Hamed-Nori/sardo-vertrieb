@@ -31,6 +31,13 @@ export function TextLink({ href, inline, arrow = true, className, children }: Pr
       </a>
     );
   }
+  if (href.startsWith("https://")) {
+    return (
+      <a className={classes} href={href} target="_blank" rel="noopener noreferrer">
+        {body}
+      </a>
+    );
+  }
   return (
     <Link className={classes} href={href}>
       {body}

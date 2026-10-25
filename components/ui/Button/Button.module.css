@@ -22,6 +22,8 @@
 .primary:hover { background: var(--color-interactive-hover); border-color: var(--color-interactive-hover); }
 .secondary { background: transparent; color: var(--color-text-primary); border-color: var(--color-border-default); }
 .secondary:hover { border-color: var(--color-accent-strong); background: var(--color-surface-card); }
+.whatsapp { background: var(--color-whatsapp); color: var(--color-text-on-whatsapp); border-color: var(--color-whatsapp); }
+.whatsapp:hover { background: var(--color-whatsapp-hover); border-color: var(--color-whatsapp-hover); }
 .compact { min-height: 2.75rem; padding: var(--space-2) var(--space-5); font-size: var(--type-small-size); }
 .block { width: 100%; }
 .button:disabled, .button[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }

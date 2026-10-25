@@ -13,7 +13,12 @@ import { TextLink } from "@/components/ui/TextLink/TextLink";
 import styles from "./ContactForm.module.css";
 
 type FormContent = Content["contact"]["form"];
-type Props = { form: FormContent; demo: boolean } & Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">;
+type Props = {
+  form: FormContent;
+  /** Mailversand nicht konfiguriert: nach gültigem Absenden auf WhatsApp verweisen */
+  demo: boolean;
+  whatsappUrl: string;
+} & Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit">;
 
 type Values = Record<ContactField, string>;
 type Errors = Partial<Record<ContactField, string>>;
@@ -40,15 +45,14 @@ function messageFor(field: ContactField, value: string, form: FormContent): stri
   }
 }
 
-// Der Legal-Text verweist auf die Datenschutzerklärung – das Wort wird zum Link
-function LegalText({ text }: { text: string }) {
-  const word = "Datenschutzerklärung";
+// Macht ein Wort im Text zum Link (Datenschutzerklärung, WhatsApp)
+function LinkedText({ text, word, href }: { text: string; word: string; href: string }) {
   const [before, after] = text.split(word);
   if (after === undefined) return <>{text}</>;
   return (
     <>
       {before}
-      <TextLink href="/datenschutz" inline>
+      <TextLink href={href} inline>
         {word}
       </TextLink>
       {after}
@@ -56,7 +60,7 @@ function LegalText({ text }: { text: string }) {
   );
 }
 
-export function ContactForm({ form, demo, className, ...rest }: Props) {
+export function ContactForm({ form, demo, whatsappUrl, className, ...rest }: Props) {
   const [values, setValues] = useState<Values>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -174,7 +178,6 @@ export function ContactForm({ form, demo, className, ...rest }: Props) {
   }
 
   const f = form.fields;
-  const statusClass = [styles.status, status === "demo-sent" && styles.demoSent].filter(Boolean).join(" ");
 
   return (
     <form
@@ -271,21 +274,20 @@ export function ContactForm({ form, demo, className, ...rest }: Props) {
       </div>
 
       <p className={styles.legal}>
-        <LegalText text={form.legal} />
+        <LinkedText text={form.legal} word="Datenschutzerklärung" href="/datenschutz" />
       </p>
 
       <Button variant="primary" block type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Wird gesendet …" : form.submit}
       </Button>
 
-      <div className={statusClass} role="status" aria-live="polite">
-        {demo && (
-          <p className={styles.demo}>
-            <span className={styles.demoBadge}>Demo</span>{" "}
-            {status === "invalid" ? form.status.invalid : form.status.demo}
+      <div className={styles.status} role="status" aria-live="polite">
+        {status === "invalid" && <p className={styles.note}>{form.status.invalid}</p>}
+        {status === "demo-sent" && (
+          <p className={styles.note}>
+            <LinkedText text={form.status.demo} word="WhatsApp" href={whatsappUrl} />
           </p>
         )}
-        {!demo && status === "invalid" && <p className={styles.demo}>{form.status.invalid}</p>}
       </div>
       {status === "error" && (
         <p className={styles.error} role="alert">

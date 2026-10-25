@@ -1,5 +1,6 @@
 import { content } from "@/lib/content";
 import { isMailConfigured } from "@/lib/mail";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { Container } from "@/components/ui/Container/Container";
 import { Panel } from "@/components/ui/Panel/Panel";
 import { Lead, SectionHeading } from "@/components/ui/SectionHeading/SectionHeading";
@@ -25,8 +26,14 @@ export function Contact() {
               <Steps items={contact.steps} />
             </SectionHeading>
 
-            {/* Demo-Modus, bis RESEND_API_KEY und CONTACT_TO gesetzt sind */}
-            <ContactForm form={contact.form} demo={!isMailConfigured()} data-reveal data-contact-form />
+            {/* Ohne RESEND_API_KEY und CONTACT_TO wird nichts versendet, sondern auf WhatsApp verwiesen */}
+            <ContactForm
+              form={contact.form}
+              demo={!isMailConfigured()}
+              whatsappUrl={whatsappUrl}
+              data-reveal
+              data-contact-form
+            />
           </Panel>
         </Container>
       </section>

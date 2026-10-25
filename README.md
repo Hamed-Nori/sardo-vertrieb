@@ -1,4 +1,4 @@
-# Sardo-Vertrieb – Website
+# Sardo Digital – Website
 
 Next.js-Umsetzung (App Router, TypeScript, CSS Modules, GSAP + ScrollTrigger) des freigegebenen
 Prototyps aus `../sardo-vertrieb-design/`. Der Prototyp ist die visuelle Referenz, `docs/09` die Bauanleitung.

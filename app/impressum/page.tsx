@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/layout/LegalPage/LegalPage";
 
 // Platzhalter (Text aus prototype/impressum.html) – bis echte Angaben vorliegen
 export const metadata: Metadata = {
-  title: "Impressum · Sardo-Vertrieb",
+  title: "Impressum · Sardo Digital",
   alternates: { canonical: "/impressum" },
   robots: { index: false, follow: true },
 };

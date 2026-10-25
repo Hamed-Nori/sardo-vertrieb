@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Sardo-Vertrieb – Design Tokens (CSS Custom Properties)
+   Sardo Digital – Design Tokens (CSS Custom Properties)
    Basis: design-system/tokens.css (Version 1.0.0). Abweichung ab 10/2026:
    Markenfarbe Blau #005BCC aus dem Logo statt Petrol, Navy-Grundtöne und
    ein zusätzliches Light-Theme. Typografie, Abstände, Radien, Bewegung unverändert.
@@ -29,6 +29,9 @@
   --palette-blue-300: #8DBBF7;
   --palette-coral-300: #E39A8E;
   --palette-red-700: #B42318;
+  --palette-whatsapp-500: #25D366; /* WhatsApp-Markengrün */
+  --palette-whatsapp-550: #21C05C;
+  --palette-whatsapp-ink: #111B21; /* WhatsApp-Dunkel · 8.8:1 auf Grün */
   --palette-light-50:  #F7F9FC;
   --palette-light-100: #EEF2F8;
   --palette-light-150: #E9EFF7;
@@ -43,6 +46,9 @@
   --color-brand: var(--palette-blue-logo); /* blaue Logo-Teile, in beiden Themes · 3.7:1 auf Navy, 4.9:1 auf Hell */
   --color-text-on-accent: #FFFFFF;
   --color-accent-primary: var(--palette-blue-700); /* Primär-Button · 6.2:1 mit Weiß */
+  --color-whatsapp: var(--palette-whatsapp-500);
+  --color-whatsapp-hover: var(--palette-whatsapp-550); /* 7.3:1 mit whatsapp-ink */
+  --color-text-on-whatsapp: var(--palette-whatsapp-ink);
 }
 
 /* ---------- Dark (Standard) ------------------------------------------- */

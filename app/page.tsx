@@ -1,4 +1,6 @@
 import { content } from "@/lib/content";
+import { whatsappUrl } from "@/lib/whatsapp";
+import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat/WhatsAppFloat";
 import { SiteHeader } from "@/components/layout/SiteHeader/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter/SiteFooter";
 import { Hero } from "@/components/sections/Hero/Hero";
@@ -21,6 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <SiteFooter />
+      <WhatsAppFloat href={whatsappUrl} label={content.whatsapp.ariaLabel} />
     </>
   );
 }

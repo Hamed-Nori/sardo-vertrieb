@@ -24,7 +24,7 @@ export async function sendContactMail(data: ContactFields): Promise<void> {
   if (!apiKey || !to) throw new Error("Mailversand ist nicht konfiguriert");
 
   // Absender muss eine bei Resend verifizierte Domain sein (EU-Region wählen)
-  const from = process.env.CONTACT_FROM ?? "Sardo-Vertrieb <onboarding@resend.dev>";
+  const from = process.env.CONTACT_FROM ?? "Sardo Digital <onboarding@resend.dev>";
 
   // Betreff nur aus festen Werten – keine Nutzereingaben (Header-Injection)
   const topicLabel =

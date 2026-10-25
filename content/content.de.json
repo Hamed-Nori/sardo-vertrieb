@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Sardo-Vertrieb · Digitale Zahlungslösungen und Kartenzahlung für Unternehmen",
+    "title": "Sardo Digital · Digitale Zahlungslösungen und Kartenzahlung für Unternehmen",
     "description": "Kartenzahlung für Gastronomie, Einzelhandel, Praxen und Dienstleister: das Zahlungsterminal Shift4 One, ohne Kassenintegration – mit persönlicher Payment-Beratung von Daniele Sardo."
   },
   "nav": {
@@ -32,7 +32,7 @@
     }
   },
   "hero": {
-    "eyebrow": "Sardo-Vertrieb · Payment-Lösungen",
+    "eyebrow": "Sardo Digital · Payment-Lösungen",
     "title": {
       "text": "Digitale Bezahllösungen",
       "accent": "für den Geschäftsalltag"
@@ -45,10 +45,6 @@
     "primaryCta": {
       "label": "Jetzt Beratung anfragen",
       "href": "#kontakt"
-    },
-    "secondaryCta": {
-      "label": "Lösungen entdecken",
-      "href": "#leistungen"
     },
     "image": {
       "src": "/images/terminal-counter-success.webp",
@@ -144,8 +140,7 @@
       "alt": "Kartenzahlungsterminal mit Trinkgeldauswahl und einem Gesamtbetrag von 5,50 € auf dem Display",
       "width": 1122,
       "height": 1402,
-      "position": "50% 50%",
-      "badge": "Illustrative Darstellung"
+      "position": "50% 50%"
     },
     "stats": [
       {
@@ -180,18 +175,18 @@
     ],
     "signature": {
       "name": "Daniele Sardo",
-      "role": "Inhaber · Sardo-Vertrieb"
+      "role": "Inhaber · Sardo Digital"
     },
     "cta": {
       "label": "Mit Daniele sprechen",
       "href": "#kontakt"
     },
     "image": {
-      "src": "/images/consulting-desk-900.webp",
-      "alt": "Arbeitsplatz mit Notizbuch, Stift und Smartphone auf einem dunklen Schreibtisch",
-      "width": 900,
-      "height": 1240,
-      "position": "42% 70%"
+      "src": "/images/daniele-sardo-portrait.webp",
+      "alt": "Porträt von Daniele Sardo im dunkelblauen Sakko",
+      "width": 1122,
+      "height": 1402,
+      "position": "50% 8%"
     }
   },
   "faq": {
@@ -296,10 +291,10 @@
       "legal": "Mit * markierte Felder sind Pflichtfelder. Informationen zur Verarbeitung deiner Daten findest du in der Datenschutzerklärung.",
       "submit": "Beratungsanfrage senden",
       "status": {
-        "demo": "Vorschau-Formular: Es wird noch keine Nachricht versendet.",
+        "demo": "Das Formular ist noch nicht freigeschaltet. Schreib mir gerne direkt per WhatsApp.",
         "invalid": "Bitte prüfe die markierten Felder.",
-        "success": "[FREIGABE AUSSTEHEND] Danke! Deine Anfrage ist angekommen. Ich melde mich in Kürze bei dir.",
-        "error": "[FREIGABE AUSSTEHEND] Das hat leider nicht geklappt. Bitte versuche es später erneut."
+        "success": "Danke! Deine Anfrage ist angekommen. Ich melde mich in Kürze bei dir.",
+        "error": "Das hat leider nicht geklappt. Bitte versuche es später erneut."
       }
     },
     "backgroundImage": {
@@ -359,5 +354,10 @@
         "href": "https://www.ncodea.de"
       }
     }
+  },
+  "whatsapp": {
+    "number": "491775359611",
+    "label": "WhatsApp",
+    "ariaLabel": "Per WhatsApp schreiben (öffnet in neuem Fenster)"
   }
 }

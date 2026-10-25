@@ -103,6 +103,23 @@ const browser = await chromium.launch();
   await light.close();
 }
 
+// 4c · WhatsApp: Hero-Button und schwebender Button
+{
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });
+  await page.goto(SITE, { waitUntil: "networkidle" });
+  const hero = page.locator("#top a[href^='https://wa.me/']");
+  check("Hero: WhatsApp-Link auf wa.me/491775359611", (await hero.getAttribute("href")) === "https://wa.me/491775359611");
+  check("Hero: WhatsApp öffnet in neuem Fenster", (await hero.getAttribute("target")) === "_blank" && (await hero.getAttribute("rel"))?.includes("noopener"));
+  const float = page.locator("[data-whatsapp-float]");
+  const vis = () => float.evaluate((e) => getComputedStyle(e).visibility);
+  check("Schwebender Button im Hero verborgen", (await vis()) === "hidden", await vis());
+  await page.evaluate(() => window.scrollTo(0, 2000));
+  await page.waitForTimeout(300);
+  check("Schwebender Button nach dem Scrollen sichtbar", (await vis()) === "visible", await vis());
+  check("Schwebender Button öffnet in neuem Fenster", (await float.getAttribute("target")) === "_blank");
+  await page.close();
+}
+
 // 5 · Formular (Demo-Modus)
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });
@@ -124,7 +141,14 @@ const browser = await chromium.launch();
   await page.selectOption("#f-topic", "payment");
   await page.getByRole("button", { name: "Beratungsanfrage senden" }).click();
   const demo = await page.locator('#kontakt [role="status"]').first().textContent();
-  check("Gültig im Demo-Modus: Demo-Hinweis, kein Versand", demo?.includes("Es wird noch keine Nachricht versendet"), demo ?? "");
+  check("Ohne Mailversand: Verweis auf WhatsApp statt Scheinerfolg", demo?.includes("noch nicht freigeschaltet"), demo ?? "");
+  const waLink = page.locator('#kontakt [role="status"] a[href^="https://wa.me/"]');
+  check("Verweis enthält WhatsApp-Link (neues Fenster)", (await waLink.getAttribute("target")) === "_blank");
+  const idle = await browser.newPage();
+  await idle.goto(SITE, { waitUntil: "networkidle" });
+  const idleText = (await idle.locator('#kontakt [role="status"]').first().textContent())?.trim();
+  check("Kein Demo-Hinweis im Ruhezustand", !idleText, String(idleText));
+  await idle.close();
   await page.close();
 }
 

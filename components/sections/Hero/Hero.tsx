@@ -5,11 +5,13 @@ import { Checklist } from "@/components/ui/Checklist/Checklist";
 import { Container } from "@/components/ui/Container/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow/Eyebrow";
 import { Headline } from "@/components/ui/SectionHeading/Headline";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon/WhatsAppIcon";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { HeroMotion } from "./HeroMotion";
 import styles from "./Hero.module.css";
 
 export function Hero() {
-  const { hero } = content;
+  const { hero, whatsapp } = content;
   return (
     <HeroMotion>
       <section className={styles.hero} id="top" aria-labelledby="hero-title">
@@ -38,8 +40,15 @@ export function Hero() {
               <Button variant="primary" href={hero.primaryCta.href}>
                 {hero.primaryCta.label}
               </Button>
-              <Button variant="secondary" href={hero.secondaryCta.href}>
-                {hero.secondaryCta.label}
+              <Button
+                variant="whatsapp"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={whatsapp.ariaLabel}
+              >
+                <WhatsAppIcon className={styles.whatsappIcon} />
+                {whatsapp.label}
               </Button>
             </ButtonGroup>
           </div>

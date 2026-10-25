@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./Button.module.css";
 
 type CommonProps = {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "whatsapp";
   size?: "default" | "compact";
   block?: boolean;
   className?: string;
@@ -26,8 +26,8 @@ export function Button(props: LinkProps | ButtonProps) {
 
   if (rest.href !== undefined) {
     const { href, ...anchorProps } = rest as LinkProps;
-    // Sprungmarken auf derselben Seite bleiben einfache Anker
-    if (href.startsWith("#")) {
+    // Sprungmarken und externe Ziele bleiben einfache Anker
+    if (href.startsWith("#") || href.startsWith("https://")) {
       return (
         <a className={classes} href={href} {...anchorProps}>
           {children}

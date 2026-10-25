@@ -14,6 +14,7 @@
   .media { min-height: 28rem; }
 }
 @media (min-width: 992px) {
-  .about { grid-template-columns: 7fr 5fr; gap: var(--gap-split); align-items: stretch; }
-  .media { min-height: 0; }
+  /* Desktop: Bild links, Inhalt rechts (mobil bleibt der Text zuerst) */
+  .about { grid-template-columns: 5fr 7fr; gap: var(--gap-split); align-items: stretch; }
+  .media { min-height: 0; order: -1; }
 }

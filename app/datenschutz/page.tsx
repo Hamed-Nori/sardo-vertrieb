@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/layout/LegalPage/LegalPage";
 
 // Platzhalter (Text aus prototype/datenschutz.html) – wird vor Livegang erstellt und rechtlich geprüft
 export const metadata: Metadata = {
-  title: "Datenschutzerklärung · Sardo-Vertrieb",
+  title: "Datenschutzerklärung · Sardo Digital",
   alternates: { canonical: "/datenschutz" },
   robots: { index: false, follow: true },
 };

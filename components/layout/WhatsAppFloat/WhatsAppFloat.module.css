@@ -1,0 +1,17 @@
+/* Runder WhatsApp-Button unten rechts – erscheint, sobald der Hero verlassen ist */
+.float {
+  position: fixed; right: var(--space-5); bottom: var(--space-5); z-index: calc(var(--z-header) - 1);
+  display: grid; place-items: center;
+  width: 3.5rem; height: 3.5rem; border-radius: var(--radius-pill);
+  background: var(--color-whatsapp); color: var(--color-text-on-accent);
+  box-shadow: var(--shadow-menu);
+  opacity: 0; visibility: hidden; transform: translateY(var(--space-4));
+  transition:
+    opacity var(--duration-medium) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-standard),
+    visibility var(--duration-medium) allow-discrete,
+    background-color var(--duration-short) var(--ease-standard);
+}
+.float:hover { background: var(--color-whatsapp-hover); }
+.visible { opacity: 1; visibility: visible; transform: none; }
+.icon { width: 1.75rem; height: 1.75rem; }

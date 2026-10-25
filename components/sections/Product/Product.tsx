@@ -25,8 +25,6 @@ export function Product() {
                 sizes="(min-width: 992px) 480px, 100vw"
                 style={{ objectPosition: product.image.position }}
               />
-              {/* Pflicht, solange das Gerätebild KI-generiert ist */}
-              <figcaption className={styles.caption}>{product.image.badge}</figcaption>
             </figure>
 
             <div>

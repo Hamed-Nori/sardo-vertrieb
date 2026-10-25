@@ -11,7 +11,6 @@ export type Img = {
   width: number;
   height: number;
   position?: string;
-  badge?: string;
 };
 
 export type ServiceItem = {
@@ -36,7 +35,6 @@ export type Content = {
     lead: string;
     checklist: string[];
     primaryCta: Link;
-    secondaryCta: Link;
     image: Img & { alt: string };
   };
   services: {
@@ -51,7 +49,7 @@ export type Content = {
     lead: string;
     info: InfoItem[];
     cta: Link;
-    image: Img & { alt: string; badge: string };
+    image: Img & { alt: string };
     stats: StatItem[];
     statsNote: string;
   };
@@ -97,6 +95,7 @@ export type Content = {
     };
     backgroundImage: Img;
   };
+  whatsapp: { number: string; label: string; ariaLabel: string };
   footer: {
     claim: string;
     columns: { heading: string; links: Link[] }[];

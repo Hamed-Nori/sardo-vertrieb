@@ -2,12 +2,6 @@
 .product { display: grid; gap: var(--space-8); align-items: center; }
 .media { position: relative; }
 .image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); }
-.caption {
-  position: absolute; left: var(--space-4); bottom: var(--space-4);
-  padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm);
-  background: var(--color-overlay-strong); color: var(--color-text-muted);
-  font-size: var(--type-caption-size);
-}
 .cta { margin-top: var(--stack-text-cta); }
 
 @media (min-width: 768px) {

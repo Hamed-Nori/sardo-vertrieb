@@ -37,7 +37,7 @@ export function SiteFooter() {
       </Container>
       <Container className={styles.base}>
         <p>
-          © <CurrentYear /> Sardo-Vertrieb
+          © <CurrentYear /> Sardo Digital
         </p>
         <p>{footer.trademark}</p>
         <p>
